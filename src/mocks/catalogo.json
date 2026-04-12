@@ -1,0 +1,238 @@
+{
+  "packs": [
+    {
+      "id": "pack_1",
+      "nombre": "CAMPARI + CITRIC 1L",
+      "precio": 13.700,
+      "imagen": "https://picsum.photos/200/300?random=1",
+      "stock": true
+    },
+    {
+      "id": "pack_2",
+      "nombre": "CAMPARI + BAGGIO NARANJA 1L",
+      "precio": 12.000,
+      "imagen": "https://picsum.photos/200/300?random=2",
+      "stock": true
+    },
+    {
+      "id": "pack_3",
+      "nombre": "GANCIA + SPRITE 2,25L",
+      "precio": 12.500,
+      "imagen": "https://picsum.photos/200/300?random=3",
+      "stock": true
+    },
+    {
+      "id": "pack_4",
+      "nombre": "SKYY CLASIC + CITRIC 1L",
+      "precio": 13.500,
+      "imagen": "https://picsum.photos/200/300?random=4",
+      "stock": true
+    },
+    {
+      "id": "pack_5",
+      "nombre": "SKYY CLASIC + BAGGIO  NARANJA 1L",
+      "precio": 11.500,
+      "imagen": "https://picsum.photos/200/300?random=5",
+      "stock": true
+    },
+    {
+      "id": "pack_6",
+      "nombre": "SKYY CLASIC + 2 SPEED XL",
+      "precio": 15.000,
+      "imagen": "https://picsum.photos/200/300?random=6",
+      "stock": true
+    },
+    {
+      "id": "pack_7",
+      "nombre": "SKYY COSMIC + 2 SPEED XL",
+      "precio": 16.000,
+      "imagen": "https://picsum.photos/200/300?random=7",
+      "stock": true
+    },
+    {
+      "id": "pack_8",
+      "nombre": "SKYY COSMIC + 2 RED BULL",
+      "precio": 16.500,
+      "imagen": "https://picsum.photos/200/300?random=8",
+      "stock": true
+    },
+    {
+      "id": "pack_9",
+      "nombre": "SKYY  RASPBERRY + 2 SPEED XL",
+      "precio": 16.000,
+      "imagen": "https://picsum.photos/200/300?random=9",
+      "stock": true
+    },
+    {
+      "id": "pack_10",
+      "nombre": "FERNET 1L + 2 COCAS 2,25L",
+      "precio": 28.000,
+      "imagen": "https://picsum.photos/200/300?random=10",
+      "stock": true
+    },
+    {
+      "id": "pack_11",
+      "nombre": "FERNET 750 ml + 2 COCAS 2,25L",
+      "precio": 22.500,
+      "imagen": "https://picsum.photos/200/300?random=11",
+      "stock": true
+    },
+    {
+      "id": "pack_12",
+      "nombre": "FERNET 750 ml + 3 COCAS 1,5L",
+      "precio": 24.000,
+      "imagen": "https://picsum.photos/200/300?random=12",
+      "stock": true
+    },
+    {
+      "id": "pack_13",
+      "nombre": "VODKA ABSOLUT ORIGINAL + 2 SPEED XL",
+      "precio": 27.500,
+      "imagen": "https://picsum.photos/200/300?random=13",
+      "stock": true
+    },
+    {
+      "id": "pack_14",
+      "nombre": "VODKA ABSOLUT MANGO + 2 SPEED XL",
+      "precio": 28.500,
+      "imagen": "https://picsum.photos/200/300?random=14",
+      "stock": true
+    },
+    {
+      "id": "pack_15",
+      "nombre": "VODKA ABSOLUT WILD BERRY + 2 SPEED XL",
+      "precio": 28.500,
+      "imagen": "https://picsum.photos/200/300?random=15",
+      "stock": true
+    },
+    {
+      "id": "pack_16",
+      "nombre": "VODKA ABSOLUT RASPBERRY + 2 SPEED XL",
+      "precio": 28.500,
+      "imagen": "https://picsum.photos/200/300?random=16",
+      "stock": true
+    },
+    {
+      "id": "pack_17",
+      "nombre": "GIN HENDRICKS + 2 SCHWEPPES TÓNICA",
+      "precio": 54.900,
+      "imagen": "https://picsum.photos/200/300?random=17",
+      "stock": true
+    },
+    {
+      "id": "pack_18",
+      "nombre": "GIN HENDRICKS + 2 SPEED XL",
+      "precio": 56.500,
+      "imagen": "https://picsum.photos/200/300?random=18",
+      "stock": true
+    },
+    {
+      "id": "pack_19",
+      "nombre": "GIN BOMBAY RASPBERRY + 2 SCHWEPPES TÓNICA 1,5L",
+      "precio": 39.000,
+      "imagen": "https://picsum.photos/200/300?random=19",
+      "stock": true
+    },
+    {
+      "id": "pack_20",
+      "nombre": "GIN BOMBAY SAPPHIRE +  2 SCHWEPPES TÓNICA 1,5L",
+      "precio": 35.000,
+      "imagen": "https://picsum.photos/200/300?random=20",
+      "stock": true
+    },
+    {
+      "id": "pack_21",
+      "nombre": "GIN HENDRICKS + 1SCHWEPPES TÓNICA 1,5L",
+      "precio": 54.000,
+      "imagen": "https://picsum.photos/200/300?random=21",
+      "stock": true
+    },
+    {
+      "id": "pack_22",
+      "nombre": "SMIRNOFF CLÁSICO + 2 MONSTER PINEAPPLE",
+      "precio": 12.000,
+      "imagen": "https://picsum.photos/200/300?random=22",
+      "stock": true
+    },
+    {
+      "id": "pack_23",
+      "nombre": "VODKA ABSOLUT WILD BERRY + BAGGIO NARANJA 1L",
+      "precio": 25.800,
+      "imagen": "https://picsum.photos/200/300?random=23",
+      "stock": true
+    },
+    {
+      "id": "pack_24",
+      "nombre": "VODKA ABSOLUT MANGO + BAGGIO NARANJA 1L",
+      "precio": 25.500,
+      "imagen": "https://picsum.photos/200/300?random=24",
+      "stock": true
+    },
+    {
+      "id": "pack_25",
+      "nombre": "VODKA ABSOLUT CLÁSICO + BAGGIO NARANJA 1L",
+      "precio": 24.800,
+      "imagen": "https://picsum.photos/200/300?random=25",
+      "stock": true
+    },
+    {
+      "id": "pack_26",
+      "nombre": "VODKA ABSOLUT RASPBERRY +BAGGIO MULTIF/NARANJA",
+      "precio": 25.500,
+      "imagen": "https://picsum.photos/200/300?random=26",
+      "stock": true
+    },
+    {
+      "id": "pack_27",
+      "nombre": "GIN ACONCAGUA  ORIGINAL +BAGGIO NARANJA 1L",
+      "precio": 16.000,
+      "imagen": "https://picsum.photos/200/300?random=27",
+      "stock": true
+    },
+    {
+      "id": "pack_28",
+      "nombre": "GIN ACONCAGUA ROSA  RED BERRY + BAGGIO 1L NARANJA",
+      "precio": 18.500,
+      "imagen": "https://picsum.photos/200/300?random=28",
+      "stock": true
+    },
+    {
+      "id": "pack_29",
+      "nombre": "JAGGERMEISTER + 1 SPRITE 1,5L",
+      "precio": 32.000,
+      "imagen": "https://picsum.photos/200/300?random=29",
+      "stock": true
+    },
+    {
+      "id": "pack_30",
+      "nombre": "JAGGERMEISTER + 1 SCHWEPPES TÓNICA",
+      "precio": 31.000,
+      "imagen": "https://picsum.photos/200/300?random=30",
+      "stock": true
+    },
+    {
+      "id": "pack_31",
+      "nombre": "JAGGERMEISTER + 4 LATAS SCHWEPPES TÓNICA",
+      "precio": 34.000,
+      "imagen": "https://picsum.photos/200/300?random=31",
+      "stock": true
+    }
+  ],
+  "promos": [
+    {
+      "id": "promo_1",
+      "id_producto": "pack_5",
+      "descuento": "0.10"
+    },
+    {
+      "id": "promo_2",
+      "id_producto": "pack_1",
+      "descuento": "0.20"
+    },
+    {
+      "id": "promo_3",
+      "id_producto": "pack_12",
+      "descuento": "0.15"
+    }
+  ]
+}

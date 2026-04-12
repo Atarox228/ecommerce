@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  --text: #1e2f4f;
+  --text-h: #D6AA2A;
+  --bg: #f5f8ff;
+  --bg-section: #f0f4fb;
+  --border: #d9e4f4;
+  --shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  --sans: 'Poppins', 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Poppins', 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+  --accent: #f6b914;
+  --accent-dark: #d19d0a;
+  font: 16px/1.5 var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 0;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  padding: 0 16px;
+}
+
+/* Mobile-first responsive */
+@media (max-width: 640px) {
+  #root {
+    padding: 0 12px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  #root {
+    padding: 0 20px;
+  }
+}
+
+@media (min-width: 1025px) {
+  #root {
+    padding: 0 32px;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading);
+  color: var(--text-h);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  color: #546e8f;
+}
+
