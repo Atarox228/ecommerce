@@ -14,7 +14,7 @@ function OffersSection() {
   }, []);
 
   return (
-    <section className="offers-section">
+    <section className="offers-section" id="promociones">
       <div className="section-header">
         <h2>Ofertas Imperdibles</h2>
         <p className="section-subtitle">Aprovecha nuestros descuentos por tiempo limitado</p>
