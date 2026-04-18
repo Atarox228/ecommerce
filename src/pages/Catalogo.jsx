@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import CatalogoHero from '../components/Catalogo/CatalogoHero';
+import CatalogoToolbar from '../components/Catalogo/CatalogoToolbar';
+import CatalogoSidebar from '../components/Catalogo/CatalogoSidebar';
+import CatalogoResults from '../components/Catalogo/CatalogoResults';
 import { getCatalogoItems } from '../services/api';
 import { content } from '../content';
 import '../styles/catalogo-page.css';
@@ -11,6 +15,30 @@ function formatPrice(value) {
   return new Intl.NumberFormat('es-AR').format(Math.round(value || 0));
 }
 
+function getItemTitle(item) {
+  return item.nombre || item.name || '';
+}
+
+function buildWhatsAppMessage(cartItems, subtotal, totalQuantity) {
+  const lines = [content.catalogo.cart.messageIntro, ''];
+
+  cartItems.forEach((item, index) => {
+    lines.push(
+      `${index + 1}. ${getItemTitle(item)} x${item.quantity} - $${formatPrice(item.price * item.quantity)}`,
+    );
+  });
+
+  lines.push(
+    '',
+    `${content.catalogo.cart.totalLabel}: $${formatPrice(subtotal)}`,
+    `${content.catalogo.cart.itemsLabel}: ${totalQuantity}`,
+    '',
+    content.catalogo.cart.messageFooter,
+  );
+
+  return lines.join('\n');
+}
+
 function Catalogo() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,6 +47,7 @@ function Catalogo() {
   const [priceMin, setPriceMin] = useState(0);
   const [priceMax, setPriceMax] = useState(0);
   const [page, setPage] = useState(1);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -130,199 +159,132 @@ function Catalogo() {
     setPriceMax(Number.isFinite(nextValue) ? Math.max(nextValue, priceMin || nextValue) : 0);
   };
 
+  const handleAddToCart = (item) => {
+    const title = getItemTitle(item);
+    const price = item.price ?? item.precio ?? 0;
+    const image = item.imagen || item.image || '';
+
+    setCartItems((currentItems) => {
+      const existingItem = currentItems.find((cartItem) => cartItem.id === item.id);
+
+      if (existingItem) {
+        return currentItems.map((cartItem) => (
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        ));
+      }
+
+      return [
+        ...currentItems,
+        {
+          id: item.id,
+          title,
+          image,
+          price,
+          quantity: 1,
+        },
+      ];
+    });
+  };
+
+  const handleIncreaseQuantity = (itemId) => {
+    setCartItems((currentItems) => currentItems.map((cartItem) => (
+      cartItem.id === itemId
+        ? { ...cartItem, quantity: cartItem.quantity + 1 }
+        : cartItem
+    )));
+  };
+
+  const handleDecreaseQuantity = (itemId) => {
+    setCartItems((currentItems) => currentItems
+      .map((cartItem) => {
+        if (cartItem.id !== itemId) {
+          return cartItem;
+        }
+
+        return { ...cartItem, quantity: cartItem.quantity - 1 };
+      })
+      .filter((cartItem) => cartItem.quantity > 0));
+  };
+
+  const handleRemoveFromCart = (itemId) => {
+    setCartItems((currentItems) => currentItems.filter((cartItem) => cartItem.id !== itemId));
+  };
+
+  const handleClearCart = () => {
+    setCartItems([]);
+  };
+
+  const cartTotals = useMemo(() => {
+    const quantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+    const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+
+    return {
+      quantity,
+      subtotal,
+    };
+  }, [cartItems]);
+
+  const handleCheckout = () => {
+    if (cartItems.length === 0) {
+      return;
+    }
+
+    const message = buildWhatsAppMessage(cartItems, cartTotals.subtotal, cartTotals.quantity);
+    const whatsappUrl = `https://wa.me/${content.catalogo.cart.whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  const isItemInCart = (itemId) => cartItems.some((cartItem) => cartItem.id === itemId);
+
   return (
     <div className="catalogo-page">
       <Header />
 
       <main className="catalogo-main">
-        <section className="catalogo-hero">
-          <nav className="catalogo-breadcrumb" aria-label="Breadcrumb">
-            <a href={content.routes.home}>{content.catalogo.breadcrumbHome}</a>
-            <span aria-hidden="true">›</span>
-            <span>{content.catalogo.breadcrumbCurrent}</span>
-          </nav>
+        <CatalogoHero
+          itemsCount={items.length}
+          filteredCount={filteredItems.length}
+          maxPrice={availableRange.max}
+          formatPrice={formatPrice}
+        />
 
-          <div className="catalogo-hero-card">
-            <div>
-              <p className="catalogo-eyebrow">{content.catalogo.eyebrow}</p>
-              <h1>{content.catalogo.title}</h1>
-              <p className="catalogo-intro">
-                {content.catalogo.intro.lead}
-                <strong>{content.catalogo.intro.source}</strong>
-                {content.catalogo.intro.middle}
-                <strong>{content.catalogo.intro.service}</strong>
-                {content.catalogo.intro.tail}
-              </p>
-            </div>
-
-            <div className="catalogo-stats" aria-label="Resumen del catálogo">
-              <div className="stat-card">
-                <strong>{formatPrice(items.length)}</strong>
-                <span>{content.catalogo.stats.products}</span>
-              </div>
-              <div className="stat-card">
-                <strong>{formatPrice(filteredItems.length)}</strong>
-                <span>{content.catalogo.stats.results}</span>
-              </div>
-              <div className="stat-card">
-                <strong>{formatPrice(availableRange.max)}</strong>
-                <span>{content.catalogo.stats.maxPrice}</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="catalogo-toolbar" aria-label="Herramientas del catálogo">
-          <label className="catalogo-search">
-            <span>{content.catalogo.toolbar.searchLabel}</span>
-            <input
-              type="search"
-              placeholder={content.catalogo.toolbar.searchPlaceholder}
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-            />
-          </label>
-
-          <label className="catalogo-sort">
-            <span>{content.catalogo.toolbar.sortLabel}</span>
-            <select value={sortBy} onChange={(event) => setSortBy(event.target.value)}>
-              {content.catalogo.toolbar.sortOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </label>
-        </section>
+        <CatalogoToolbar
+          query={query}
+          onQueryChange={setQuery}
+          sortBy={sortBy}
+          onSortByChange={setSortBy}
+        />
 
         <section className="catalogo-layout">
-          <aside className="catalogo-sidebar" aria-label="Filtros del catálogo">
-            <div className="filter-card">
-              <h2>{content.catalogo.filters.priceTitle}</h2>
-              <div className="price-inputs">
-                <label>
-                  <span>{content.catalogo.filters.minLabel}</span>
-                  <input
-                    type="number"
-                    min={0}
-                    step={500}
-                    value={priceMin}
-                    onChange={handlePriceMinChange}
-                  />
-                </label>
-                <label>
-                  <span>{content.catalogo.filters.maxLabel}</span>
-                  <input
-                    type="number"
-                    min={0}
-                    step={500}
-                    value={priceMax}
-                    onChange={handlePriceMaxChange}
-                  />
-                </label>
-              </div>
-              <p className="price-summary">
-                {content.catalogo.filters.activeRangePrefix} ${formatPrice(priceMin)} - ${formatPrice(priceMax)}
-              </p>
-            </div>
+          <CatalogoSidebar
+            priceMin={priceMin}
+            priceMax={priceMax}
+            onPriceMinChange={handlePriceMinChange}
+            onPriceMaxChange={handlePriceMaxChange}
+            formatPrice={formatPrice}
+            cartItems={cartItems}
+            cartTotals={cartTotals}
+            onDecreaseQuantity={handleDecreaseQuantity}
+            onIncreaseQuantity={handleIncreaseQuantity}
+            onRemoveFromCart={handleRemoveFromCart}
+            onClearCart={handleClearCart}
+            onCheckout={handleCheckout}
+          />
 
-            {/* <div className="filter-card">
-              <h2>{content.catalogo.filters.stateTitle}</h2>
-              <p className="sidebar-text">{content.catalogo.filters.stateText}</p>
-            </div> */}
-          </aside>
-
-          <div className="catalogo-results">
-            <div className="catalogo-results-header">
-              <p>
-                {loading
-                  ? content.catalogo.results.loadingSummary
-                  : `${filteredItems.length} ${filteredItems.length === 1 ? content.catalogo.results.resultSingular : content.catalogo.results.resultPlural}`}
-              </p>
-              <p>
-                {content.catalogo.results.pagePrefix} {currentPage} {content.catalogo.results.pageSeparator} {totalPages}
-              </p>
-            </div>
-
-            {loading ? (
-              <div className="loading-state">{content.catalogo.results.loadingState}</div>
-            ) : visibleItems.length === 0 ? (
-              <div className="empty-state">{content.catalogo.results.emptyState}</div>
-            ) : (
-              <div className="catalogo-grid">
-                {visibleItems.map((item) => {
-                  const title = item.nombre || item.name;
-                  const image = item.imagen || item.image;
-                  const displayPrice = item.price ?? item.precio ?? 0;
-                  const originalPrice = item.originalPrice;
-
-                  return (
-                    <article className="catalogo-card" key={item.id}>
-                      <div className="catalogo-card-image">
-                        <img src={image} alt={title} loading="lazy" />
-                        {item.discount > 0 && <span className="catalogo-badge">-{item.discount}%</span>}
-                      </div>
-
-                      <div className="catalogo-card-body">
-                        <p className="catalogo-card-name">{title}</p>
-
-                        <div className="catalogo-price-row">
-                          <strong>${formatPrice(displayPrice)}</strong>
-                          {originalPrice && originalPrice !== displayPrice && (
-                            <del>${formatPrice(originalPrice)}</del>
-                          )}
-                        </div>
-
-                        <p className="catalogo-stock">
-                          {item.stock ? content.catalogo.results.available : content.catalogo.results.unavailable}
-                        </p>
-
-                        <button type="button" className="catalogo-button">
-                          {content.catalogo.buttons.detail}
-                        </button>
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            )}
-
-            {totalPages > 1 && (
-              <nav className="catalogo-pagination" aria-label="Paginación del catálogo">
-                <button
-                  type="button"
-                  className="page-button"
-                  onClick={() => setPage((current) => Math.max(1, current - 1))}
-                  disabled={currentPage === 1}
-                  aria-label={content.catalogo.buttons.prevPageLabel}
-                >
-                  ‹
-                </button>
-
-                {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
-                  <button
-                    type="button"
-                    key={pageNumber}
-                    className={`page-button ${pageNumber === currentPage ? 'active' : ''}`}
-                    onClick={() => setPage(pageNumber)}
-                    aria-current={pageNumber === currentPage ? 'page' : undefined}
-                  >
-                    {pageNumber}
-                  </button>
-                ))}
-
-                <button
-                  type="button"
-                  className="page-button"
-                  onClick={() => setPage((current) => Math.min(totalPages, current + 1))}
-                  disabled={currentPage === totalPages}
-                  aria-label={content.catalogo.buttons.nextPageLabel}
-                >
-                  ›
-                </button>
-              </nav>
-            )}
-          </div>
+          <CatalogoResults
+            loading={loading}
+            filteredItems={filteredItems}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            visibleItems={visibleItems}
+            formatPrice={formatPrice}
+            onAddToCart={handleAddToCart}
+            isItemInCart={isItemInCart}
+            onPageChange={setPage}
+          />
         </section>
       </main>
 
