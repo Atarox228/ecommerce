@@ -1,4 +1,4 @@
-import catalogo from '../mocks/catalogo.json';
+import { content } from '../content';
 
 const USE_MOCK = true;
 
@@ -27,11 +27,11 @@ function normalizePromo(promo) {
 export async function getCatalogo() {
   if (USE_MOCK) {
     return {
-      ...catalogo,
-      packs: (catalogo.packs ?? []).map(normalizeProduct),
-      promos: (catalogo.promos ?? []).map(normalizePromo),
-      productos: (catalogo.productos ?? []).map(normalizeProduct),
-      categorias: catalogo.categorias ?? [],
+      ...content.catalogoData,
+      packs: (content.catalogoData.packs ?? []).map(normalizeProduct),
+      promos: (content.catalogoData.promos ?? []).map(normalizePromo),
+      productos: (content.catalogoData.productos ?? []).map(normalizeProduct),
+      categorias: content.catalogoData.categorias ?? [],
     };
   }
 

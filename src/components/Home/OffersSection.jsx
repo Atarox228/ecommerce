@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getOfertas } from '../../services/api';
+import { content } from '../../content';
+import '../../styles/home-sections.css';
 import ProductCard from './ProductCard';
 
 function OffersSection() {
@@ -16,8 +18,8 @@ function OffersSection() {
   return (
     <section className="offers-section" id="promociones">
       <div className="section-header">
-        <h2>Ofertas Imperdibles</h2>
-        <p className="section-subtitle">Aprovecha nuestros descuentos por tiempo limitado</p>
+        <h2>{content.home.offers.title}</h2>
+        <p className="section-subtitle">{content.home.offers.subtitle}</p>
       </div>
       <div className="offers-grid">
         {offers.map((offer) => (

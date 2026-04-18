@@ -4,7 +4,7 @@ import WelcomeHero from '../components/Home/WelcomeHero';
 import CategoriesSection from '../components/Home/CategoriesSection';
 import OffersSection from '../components/Home/OffersSection';
 import CombosSection from '../components/Home/CombosSection';
-import '../styles/Home.css';
+import '../styles/home-page.css';
 
 function Home() {
   return (
@@ -12,7 +12,6 @@ function Home() {
       <Header />
       <main className="home-content">
         <WelcomeHero />
-        <CategoriesSection />
         <OffersSection />
         <CombosSection />
       </main>

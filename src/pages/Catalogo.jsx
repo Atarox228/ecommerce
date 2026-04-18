@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { getCatalogoItems } from '../services/api';
-import '../styles/Home.css';
-import '../styles/Catalogo.css';
+import { content } from '../content';
+import '../styles/catalogo-page.css';
 
 const PAGE_SIZE = 9;
 
@@ -137,33 +137,36 @@ function Catalogo() {
       <main className="catalogo-main">
         <section className="catalogo-hero">
           <nav className="catalogo-breadcrumb" aria-label="Breadcrumb">
-            <a href="/">Inicio</a>
+            <a href={content.routes.home}>{content.catalogo.breadcrumbHome}</a>
             <span aria-hidden="true">›</span>
-            <span>Catálogo</span>
+            <span>{content.catalogo.breadcrumbCurrent}</span>
           </nav>
 
           <div className="catalogo-hero-card">
             <div>
-              <p className="catalogo-eyebrow">Catálogo</p>
-              <h1>Encontrá tu próximo combo con stock y promos reales</h1>
+              <p className="catalogo-eyebrow">{content.catalogo.eyebrow}</p>
+              <h1>{content.catalogo.title}</h1>
               <p className="catalogo-intro">
-                La información sale únicamente de <strong>catalogo.json</strong> y se consume mediante
-                <strong> api.js</strong>, con filtros, ordenamiento y paginación del lado del cliente.
+                {content.catalogo.intro.lead}
+                <strong>{content.catalogo.intro.source}</strong>
+                {content.catalogo.intro.middle}
+                <strong>{content.catalogo.intro.service}</strong>
+                {content.catalogo.intro.tail}
               </p>
             </div>
 
             <div className="catalogo-stats" aria-label="Resumen del catálogo">
               <div className="stat-card">
                 <strong>{formatPrice(items.length)}</strong>
-                <span>Productos</span>
+                <span>{content.catalogo.stats.products}</span>
               </div>
               <div className="stat-card">
                 <strong>{formatPrice(filteredItems.length)}</strong>
-                <span>Resultados</span>
+                <span>{content.catalogo.stats.results}</span>
               </div>
               <div className="stat-card">
                 <strong>{formatPrice(availableRange.max)}</strong>
-                <span>Precio máximo</span>
+                <span>{content.catalogo.stats.maxPrice}</span>
               </div>
             </div>
           </div>
@@ -171,22 +174,23 @@ function Catalogo() {
 
         <section className="catalogo-toolbar" aria-label="Herramientas del catálogo">
           <label className="catalogo-search">
-            <span>Buscar en catálogo</span>
+            <span>{content.catalogo.toolbar.searchLabel}</span>
             <input
               type="search"
-              placeholder="Buscar por nombre..."
+              placeholder={content.catalogo.toolbar.searchPlaceholder}
               value={query}
               onChange={(event) => setQuery(event.target.value)}
             />
           </label>
 
           <label className="catalogo-sort">
-            <span>Ordenar por</span>
+            <span>{content.catalogo.toolbar.sortLabel}</span>
             <select value={sortBy} onChange={(event) => setSortBy(event.target.value)}>
-              <option value="destacados">Destacados</option>
-              <option value="precio-asc">Precio: menor a mayor</option>
-              <option value="precio-desc">Precio: mayor a menor</option>
-              <option value="nombre-asc">Nombre: A a Z</option>
+              {content.catalogo.toolbar.sortOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
             </select>
           </label>
         </section>
@@ -194,10 +198,10 @@ function Catalogo() {
         <section className="catalogo-layout">
           <aside className="catalogo-sidebar" aria-label="Filtros del catálogo">
             <div className="filter-card">
-              <h2>Precio</h2>
+              <h2>{content.catalogo.filters.priceTitle}</h2>
               <div className="price-inputs">
                 <label>
-                  <span>Mínimo</span>
+                  <span>{content.catalogo.filters.minLabel}</span>
                   <input
                     type="number"
                     min={0}
@@ -207,7 +211,7 @@ function Catalogo() {
                   />
                 </label>
                 <label>
-                  <span>Máximo</span>
+                  <span>{content.catalogo.filters.maxLabel}</span>
                   <input
                     type="number"
                     min={0}
@@ -218,34 +222,32 @@ function Catalogo() {
                 </label>
               </div>
               <p className="price-summary">
-                Rango activo: ${formatPrice(priceMin)} - ${formatPrice(priceMax)}
+                {content.catalogo.filters.activeRangePrefix} ${formatPrice(priceMin)} - ${formatPrice(priceMax)}
               </p>
             </div>
 
-            <div className="filter-card">
-              <h2>Estado</h2>
-              <p className="sidebar-text">Se muestran solo productos activos. Las promos sin coincidencia en el mock se ignoran.</p>
-            </div>
+            {/* <div className="filter-card">
+              <h2>{content.catalogo.filters.stateTitle}</h2>
+              <p className="sidebar-text">{content.catalogo.filters.stateText}</p>
+            </div> */}
           </aside>
 
           <div className="catalogo-results">
             <div className="catalogo-results-header">
               <p>
                 {loading
-                  ? 'Cargando catálogo...'
-                  : `${filteredItems.length} resultado${filteredItems.length === 1 ? '' : 's'} encontrados`}
+                  ? content.catalogo.results.loadingSummary
+                  : `${filteredItems.length} ${filteredItems.length === 1 ? content.catalogo.results.resultSingular : content.catalogo.results.resultPlural}`}
               </p>
               <p>
-                Página {currentPage} de {totalPages}
+                {content.catalogo.results.pagePrefix} {currentPage} {content.catalogo.results.pageSeparator} {totalPages}
               </p>
             </div>
 
             {loading ? (
-              <div className="loading-state">Cargando los productos del catálogo...</div>
+              <div className="loading-state">{content.catalogo.results.loadingState}</div>
             ) : visibleItems.length === 0 ? (
-              <div className="empty-state">
-                No hay productos que coincidan con los filtros actuales.
-              </div>
+              <div className="empty-state">{content.catalogo.results.emptyState}</div>
             ) : (
               <div className="catalogo-grid">
                 {visibleItems.map((item) => {
@@ -272,11 +274,11 @@ function Catalogo() {
                         </div>
 
                         <p className="catalogo-stock">
-                          {item.stock ? 'Disponible para despacho' : 'Sin stock'}
+                          {item.stock ? content.catalogo.results.available : content.catalogo.results.unavailable}
                         </p>
 
                         <button type="button" className="catalogo-button">
-                          Ver detalle
+                          {content.catalogo.buttons.detail}
                         </button>
                       </div>
                     </article>
@@ -292,7 +294,7 @@ function Catalogo() {
                   className="page-button"
                   onClick={() => setPage((current) => Math.max(1, current - 1))}
                   disabled={currentPage === 1}
-                  aria-label="Página anterior"
+                  aria-label={content.catalogo.buttons.prevPageLabel}
                 >
                   ‹
                 </button>
@@ -314,7 +316,7 @@ function Catalogo() {
                   className="page-button"
                   onClick={() => setPage((current) => Math.min(totalPages, current + 1))}
                   disabled={currentPage === totalPages}
-                  aria-label="Página siguiente"
+                  aria-label={content.catalogo.buttons.nextPageLabel}
                 >
                   ›
                 </button>

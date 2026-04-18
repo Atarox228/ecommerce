@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { content } from '../content';
+import '../styles/header.css';
 
 function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
 
   const isActive = (href) => {
@@ -18,15 +21,45 @@ function Header() {
     return `text-xs sm:text-sm transition-colors duration-300 px-2 sm:px-3 py-2 ${active ? 'text-yellow-400' : 'text-white hover:text-yellow-400'}`;
   };
 
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
   return (
     <header className="header">
-      <nav className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
-        <h1 className="text-base sm:text-xl font-bold tracking-wider text-white flex-shrink-0">FASS BEBIDAS</h1>
-        <ul className="flex gap-2 sm:gap-4 lg:gap-6 list-none m-0 p-0">
-          <li><a href="/" className={linkClassName('/')}>Inicio</a></li>
-          <li><a href="/catalogo" className={linkClassName('/catalogo')}>Catálogo</a></li>
-          <li><a href="/#promociones" className={linkClassName('/#promociones')}>Promociones</a></li>
-          <li><a href="/#contacto" className={linkClassName('/#contacto')}>Contacto</a></li>
+      <nav className="header-nav">
+        <div className="header-brand-row">
+          <h1 className="header-brand">{content.site.name}</h1>
+          <button
+            type="button"
+            className="header-toggle"
+            aria-expanded={menuOpen}
+            aria-controls="primary-navigation"
+            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            onClick={() => setMenuOpen((current) => !current)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
+
+        <ul
+          id="primary-navigation"
+          className={`header-links ${menuOpen ? 'is-open' : ''}`}
+        >
+          {content.navLinks.map((link) => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                className={linkClassName(link.href)}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>

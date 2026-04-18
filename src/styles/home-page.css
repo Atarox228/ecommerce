@@ -1,0 +1,16 @@
+.home {
+  background: var(--bg);
+  width: 100%;
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+@media (max-width: 720px) {
+  .home-content {
+    gap: 56px;
+  }
+}

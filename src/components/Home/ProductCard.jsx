@@ -1,4 +1,6 @@
 import React from 'react';
+import { content } from '../../content';
+import '../../styles/product-card.css';
 
 function ProductCard({ product, isOffer = false, isCategory = false, isCombo = false }) {
   // Soportar ambos formatos: "imagen"/"nombre" (del mock) y "image"/"name"
@@ -39,7 +41,12 @@ function ProductCard({ product, isOffer = false, isCategory = false, isCombo = f
         {!isOffer && <p className="price">${price}</p>}
         {description && <p className="description">{description}</p>}
         {isCombo && (
-          <a href="#" className="combo-button inline-block bg-blue-900 hover:bg-blue-800 text-white py-2 px-3 rounded text-xs sm:text-sm font-semibold transition-colors duration-300">Ver detalle</a>
+          <a
+            href={content.productCard.detailHref}
+            className="combo-button inline-block bg-blue-900 hover:bg-blue-800 text-white py-2 px-3 rounded text-xs sm:text-sm font-semibold transition-colors duration-300"
+          >
+            {content.productCard.detailLabel}
+          </a>
         )}
       </div>
     </div>

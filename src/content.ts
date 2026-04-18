@@ -1,0 +1,139 @@
+import catalogoData from './mocks/catalogo.json';
+
+export const content = {
+  site: {
+    name: 'FASS BEBIDAS',
+    title: 'Fass Bebidas | Distribuidora de bebidas',
+    copyright: '© 2025 Fass Bebidas. Todos los derechos reservados.',
+  },
+  routes: {
+    home: '/',
+    catalogo: '/catalogo',
+    promociones: '/#promociones',
+    contacto: '/#contacto',
+  },
+  navLinks: [
+    { label: 'Inicio', href: '/' },
+    { label: 'Catálogo', href: '/catalogo' },
+    { label: 'Promociones', href: '/#promociones' },
+    { label: 'Contacto', href: '/#contacto' },
+  ],
+  home: {
+    hero: {
+      title: 'Tus bebidas favoritas al',
+      highlight: 'mejor precio',
+      description:
+        'Distribuidor oficial de vinos, licores, cervezas y bebidas espirituosas. Envíos en el día para tus eventos.',
+      ctaLabel: 'Ver Ofertas del Mes',
+      ctaHref: '/#promociones',
+    },
+    categories: {
+      title: 'Nuestras Categorías',
+      subtitle: 'Explora nuestra selección de bebidas premium y estándar',
+    },
+    offers: {
+      title: 'Ofertas Imperdibles',
+      subtitle: 'Aprovecha nuestros descuentos por tiempo limitado',
+    },
+    combos: {
+      title: 'Combos Fiesteros',
+      subtitle: 'Todo lo que necesitas para tu juntada en un solo lugar',
+      maxItems: 4,
+      ctaLabel: 'Ver catálogo completo',
+      ctaHref: '/catalogo',
+    },
+  },
+  catalogo: {
+    breadcrumbHome: 'Inicio',
+    breadcrumbCurrent: 'Catálogo',
+    eyebrow: 'Catálogo',
+    title: 'Encontrá tu próximo combo con stock y promos reales',
+    intro: {
+      lead: 'La información sale únicamente de ',
+      source: 'catalogo.json',
+      middle: ' y se consume mediante ',
+      service: 'api.js',
+      tail: ', con filtros, ordenamiento y paginación del lado del cliente.',
+    },
+    stats: {
+      products: 'Productos',
+      results: 'Resultados',
+      maxPrice: 'Precio máximo',
+    },
+    toolbar: {
+      searchLabel: 'Buscar en catálogo',
+      searchPlaceholder: 'Buscar por nombre...',
+      sortLabel: 'Ordenar por',
+      sortOptions: [
+        { value: 'destacados', label: 'Destacados' },
+        { value: 'precio-asc', label: 'Precio: menor a mayor' },
+        { value: 'precio-desc', label: 'Precio: mayor a menor' },
+        { value: 'nombre-asc', label: 'Nombre: A a Z' },
+      ],
+    },
+    filters: {
+      priceTitle: 'Precio',
+      minLabel: 'Mínimo',
+      maxLabel: 'Máximo',
+      activeRangePrefix: 'Rango activo:',
+      stateTitle: 'Estado',
+      stateText: 'Se muestran solo productos activos. Las promos sin coincidencia en el mock se ignoran.',
+    },
+    results: {
+      loadingSummary: 'Cargando catálogo...',
+      loadingState: 'Cargando los productos del catálogo...',
+      emptyState: 'No hay productos que coincidan con los filtros actuales.',
+      pagePrefix: 'Página',
+      pageSeparator: 'de',
+      resultSingular: 'resultado',
+      resultPlural: 'resultados encontrados',
+      available: 'Disponible para despacho',
+      unavailable: 'Sin stock',
+    },
+    buttons: {
+      detail: 'Ver detalle',
+      prevPageLabel: 'Página anterior',
+      nextPageLabel: 'Página siguiente',
+    },
+  },
+  footer: {
+    contactTitle: 'Contacto',
+    contactItems: [
+      {
+        label: 'Av. Libertador 1234, Ciudad',
+        href: 'https://www.google.com/maps/search/Av.+Libertador+1234,+Ciudad',
+        icon: '📍',
+        external: true,
+      },
+      {
+        label: '+54 11 1234-5678',
+        href: 'tel:+541112345678',
+        icon: '📞',
+      },
+      {
+        label: 'ventas@fassbebidas.com',
+        href: 'mailto:ventas@fassbebidas.com',
+        icon: '📧',
+      },
+      {
+        label: '@fass.logistica',
+        href: 'https://www.instagram.com/fass.logistica/',
+        icon: '📱',
+        external: true,
+      },
+    ],
+    informationTitle: 'Información',
+    informationLinks: [
+      { label: 'Términos y Condiciones', href: '#' },
+      { label: 'Política de Envíos', href: '#' },
+      { label: 'Preguntas Frecuentes', href: '#' },
+    ],
+  },
+  productCard: {
+    detailLabel: 'Ver detalle',
+    detailHref: '/catalogo',
+  },
+  catalogoData,
+};
+
+export default content;

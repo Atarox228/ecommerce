@@ -1,0 +1,62 @@
+.welcome-hero {
+  position: relative;
+  padding: 72px 20px;
+  color: #fff;
+  background: radial-gradient(circle at 20% 20%, #1f67a2 0%, #0d3153 35%, #031b32 100%);
+  text-align: center;
+}
+
+.welcome-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.welcome-hero .hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.welcome-hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+}
+
+.welcome-hero .hero-highlight {
+  display: block;
+  color: var(--accent);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+}
+
+.welcome-hero p {
+  margin: 18px 0;
+  max-width: 820px;
+  color: #d8e4fb;
+  font-size: 1.05rem;
+}
+
+.btn-primary {
+  display: inline-block;
+  margin-top: 24px;
+  border: 0;
+  background: linear-gradient(120deg, #f8c72e, #e2a70f);
+  color: #0e2137;
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 20px rgba(6, 53, 96, 0.32);
+}

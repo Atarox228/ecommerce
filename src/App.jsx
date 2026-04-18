@@ -1,11 +1,11 @@
 import Home from './pages/Home';
 import Catalogo from './pages/Catalogo';
-import './App.css';
+import { content } from './content';
 
 function App() {
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
 
-  if (pathname === '/catalogo') {
+  if (pathname === content.routes.catalogo) {
     return <Catalogo />;
   }
 
