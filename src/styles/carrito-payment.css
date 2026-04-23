@@ -1,0 +1,55 @@
+/* Selector de método de pago */
+
+.carrito-payment {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+}
+
+.carrito-payment h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+.carrito-payment p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.carrito-payment-options {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.payment-option {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--text);
+  font-weight: 600;
+  background: #fff;
+}
+
+.payment-option.is-selected {
+  border-color: var(--accent);
+  background: rgba(246, 185, 20, 0.12);
+}
+
+.payment-option input {
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .carrito-payment-options {
+    grid-template-columns: 1fr;
+  }
+}

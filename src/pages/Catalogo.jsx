@@ -6,37 +6,17 @@ import CatalogoToolbar from '../components/Catalogo/CatalogoToolbar';
 import CatalogoSidebar from '../components/Catalogo/CatalogoSidebar';
 import CatalogoResults from '../components/Catalogo/CatalogoResults';
 import { getCatalogoItems } from '../services/api';
-import { content } from '../content';
-import '../styles/catalogo-page.css';
+import { useCart } from '../context/CartContext';
+import '../styles/shared.css';
+import '../styles/catalogo-hero.css';
+import '../styles/catalogo-toolbar.css';
+import '../styles/catalogo-sidebar.css';
+import '../styles/catalogo-cards.css';
 
 const PAGE_SIZE = 9;
 
 function formatPrice(value) {
   return new Intl.NumberFormat('es-AR').format(Math.round(value || 0));
-}
-
-function getItemTitle(item) {
-  return item.nombre || item.name || '';
-}
-
-function buildWhatsAppMessage(cartItems, subtotal, totalQuantity) {
-  const lines = [content.catalogo.cart.messageIntro, ''];
-
-  cartItems.forEach((item, index) => {
-    lines.push(
-      `${index + 1}. ${getItemTitle(item)} x${item.quantity} - $${formatPrice(item.price * item.quantity)}`,
-    );
-  });
-
-  lines.push(
-    '',
-    `${content.catalogo.cart.totalLabel}: $${formatPrice(subtotal)}`,
-    `${content.catalogo.cart.itemsLabel}: ${totalQuantity}`,
-    '',
-    content.catalogo.cart.messageFooter,
-  );
-
-  return lines.join('\n');
 }
 
 function Catalogo() {
@@ -47,7 +27,17 @@ function Catalogo() {
   const [priceMin, setPriceMin] = useState(0);
   const [priceMax, setPriceMax] = useState(0);
   const [page, setPage] = useState(1);
-  const [cartItems, setCartItems] = useState([]);
+  const {
+    cartItems,
+    totals,
+    orderSent,
+    addItem,
+    increaseQuantity,
+    decreaseQuantity,
+    removeItem,
+    clearCart,
+    getItemQuantity,
+  } = useCart();
 
   useEffect(() => {
     let isMounted = true;
@@ -159,86 +149,6 @@ function Catalogo() {
     setPriceMax(Number.isFinite(nextValue) ? Math.max(nextValue, priceMin || nextValue) : 0);
   };
 
-  const handleAddToCart = (item) => {
-    const title = getItemTitle(item);
-    const price = item.price ?? item.precio ?? 0;
-    const image = item.imagen || item.image || '';
-
-    setCartItems((currentItems) => {
-      const existingItem = currentItems.find((cartItem) => cartItem.id === item.id);
-
-      if (existingItem) {
-        return currentItems.map((cartItem) => (
-          cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        ));
-      }
-
-      return [
-        ...currentItems,
-        {
-          id: item.id,
-          title,
-          image,
-          price,
-          quantity: 1,
-        },
-      ];
-    });
-  };
-
-  const handleIncreaseQuantity = (itemId) => {
-    setCartItems((currentItems) => currentItems.map((cartItem) => (
-      cartItem.id === itemId
-        ? { ...cartItem, quantity: cartItem.quantity + 1 }
-        : cartItem
-    )));
-  };
-
-  const handleDecreaseQuantity = (itemId) => {
-    setCartItems((currentItems) => currentItems
-      .map((cartItem) => {
-        if (cartItem.id !== itemId) {
-          return cartItem;
-        }
-
-        return { ...cartItem, quantity: cartItem.quantity - 1 };
-      })
-      .filter((cartItem) => cartItem.quantity > 0));
-  };
-
-  const handleRemoveFromCart = (itemId) => {
-    setCartItems((currentItems) => currentItems.filter((cartItem) => cartItem.id !== itemId));
-  };
-
-  const handleClearCart = () => {
-    setCartItems([]);
-  };
-
-  const cartTotals = useMemo(() => {
-    const quantity = cartItems.reduce((total, item) => total + item.quantity, 0);
-    const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-
-    return {
-      quantity,
-      subtotal,
-    };
-  }, [cartItems]);
-
-  const handleCheckout = () => {
-    if (cartItems.length === 0) {
-      return;
-    }
-
-    const message = buildWhatsAppMessage(cartItems, cartTotals.subtotal, cartTotals.quantity);
-    const whatsappUrl = `https://wa.me/${content.catalogo.cart.whatsappNumber}?text=${encodeURIComponent(message)}`;
-
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-  };
-
-  const isItemInCart = (itemId) => cartItems.some((cartItem) => cartItem.id === itemId);
-
   return (
     <div className="catalogo-page">
       <Header />
@@ -266,12 +176,12 @@ function Catalogo() {
             onPriceMaxChange={handlePriceMaxChange}
             formatPrice={formatPrice}
             cartItems={cartItems}
-            cartTotals={cartTotals}
-            onDecreaseQuantity={handleDecreaseQuantity}
-            onIncreaseQuantity={handleIncreaseQuantity}
-            onRemoveFromCart={handleRemoveFromCart}
-            onClearCart={handleClearCart}
-            onCheckout={handleCheckout}
+            cartTotals={totals}
+            onDecreaseQuantity={decreaseQuantity}
+            onIncreaseQuantity={increaseQuantity}
+            onRemoveFromCart={removeItem}
+            onClearCart={clearCart}
+            orderSent={orderSent}
           />
 
           <CatalogoResults
@@ -281,8 +191,11 @@ function Catalogo() {
             totalPages={totalPages}
             visibleItems={visibleItems}
             formatPrice={formatPrice}
-            onAddToCart={handleAddToCart}
-            isItemInCart={isItemInCart}
+            onAddToCart={addItem}
+            onIncreaseQuantity={increaseQuantity}
+            onDecreaseQuantity={decreaseQuantity}
+            getItemQuantity={getItemQuantity}
+            orderSent={orderSent}
             onPageChange={setPage}
           />
         </section>

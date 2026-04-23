@@ -12,7 +12,10 @@ function CatalogoResults({
   visibleItems,
   formatPrice,
   onAddToCart,
-  isItemInCart,
+  onIncreaseQuantity,
+  onDecreaseQuantity,
+  getItemQuantity,
+  orderSent,
   onPageChange,
 }) {
   return (
@@ -39,6 +42,8 @@ function CatalogoResults({
             const image = item.imagen || item.image;
             const displayPrice = item.price ?? item.precio ?? 0;
             const originalPrice = item.originalPrice;
+            const quantity = getItemQuantity(item.id);
+            const isUnavailable = !item.stock || orderSent;
 
             return (
               <article className="catalogo-card" key={item.id}>
@@ -61,15 +66,27 @@ function CatalogoResults({
                     {item.stock ? content.catalogo.results.available : content.catalogo.results.unavailable}
                   </p>
 
-                  <button
-                    type="button"
-                    className="catalogo-button"
-                    onClick={() => onAddToCart(item)}
-                  >
-                    {isItemInCart(item.id)
-                      ? content.catalogo.buttons.addAnother
-                      : content.catalogo.buttons.addToCart}
-                  </button>
+                  <div className="catalogo-quantity-control" aria-label={`Control de cantidad de ${title}`}>
+                    <button
+                      type="button"
+                      className="catalogo-qty-button"
+                      onClick={() => onDecreaseQuantity(item.id)}
+                      disabled={quantity === 0 || orderSent}
+                      aria-label={`Quitar una unidad de ${title}`}
+                    >
+                      -
+                    </button>
+                    <span className="catalogo-qty-value">{quantity}</span>
+                    <button
+                      type="button"
+                      className="catalogo-qty-button"
+                      onClick={() => (quantity === 0 ? onAddToCart(item) : onIncreaseQuantity(item.id))}
+                      disabled={isUnavailable}
+                      aria-label={`Agregar una unidad de ${title}`}
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
               </article>
             );

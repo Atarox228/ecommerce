@@ -1,3 +1,4 @@
+import CartItem from '../CartItem';
 import { content } from '../../content';
 
 function CatalogoSidebar({
@@ -12,7 +13,7 @@ function CatalogoSidebar({
   onIncreaseQuantity,
   onRemoveFromCart,
   onClearCart,
-  onCheckout,
+  orderSent,
 }) {
   return (
     <aside className="catalogo-sidebar" aria-label="Filtros del catálogo">
@@ -45,7 +46,7 @@ function CatalogoSidebar({
         </p>
       </div>
 
-      <div className="filter-card cart-card">
+      {/* <div className="filter-card cart-card">
         <div className="cart-card-header">
           <div>
             <h2>{content.catalogo.cart.title}</h2>
@@ -61,53 +62,44 @@ function CatalogoSidebar({
         ) : (
           <div className="cart-items">
             {cartItems.map((cartItem) => (
-              <article className="cart-item" key={cartItem.id}>
-                <img src={cartItem.image} alt={cartItem.title} className="cart-item-image" loading="lazy" />
-                <div className="cart-item-body">
-                  <p className="cart-item-title">{cartItem.title}</p>
-                  <p className="cart-item-price">${formatPrice(cartItem.price)} c/u</p>
-
-                  <div className="cart-item-controls">
-                    <button type="button" className="cart-step-button" onClick={() => onDecreaseQuantity(cartItem.id)}>
-                      −
-                    </button>
-                    <span>{content.catalogo.cart.quantityLabel}: {cartItem.quantity}</span>
-                    <button type="button" className="cart-step-button" onClick={() => onIncreaseQuantity(cartItem.id)}>
-                      +
-                    </button>
-                  </div>
-
-                  <div className="cart-item-footer">
-                    <strong>${formatPrice(cartItem.price * cartItem.quantity)}</strong>
-                    <button type="button" className="cart-remove-button" onClick={() => onRemoveFromCart(cartItem.id)}>
-                      {content.catalogo.cart.removeLabel}
-                    </button>
-                  </div>
-                </div>
-              </article>
+              <CartItem
+                key={cartItem.id}
+                item={cartItem}
+                onIncrease={onIncreaseQuantity}
+                onDecrease={onDecreaseQuantity}
+                onRemove={onRemoveFromCart}
+                disabled={orderSent}
+                compact
+              />
             ))}
           </div>
         )}
+
+        {orderSent && <p className="cart-lock-message">{content.catalogo.cart.lockMessage}</p>}
 
         <div className="cart-summary">
           <div>
             <span>{content.catalogo.cart.totalLabel}</span>
             <strong>${formatPrice(cartTotals.subtotal)}</strong>
           </div>
-          <button type="button" className="cart-clear-button" onClick={onClearCart} disabled={cartItems.length === 0}>
+          <button
+            type="button"
+            className="cart-clear-button"
+            onClick={onClearCart}
+            disabled={cartItems.length === 0 || orderSent}
+          >
             {content.catalogo.cart.clearLabel}
           </button>
         </div>
 
-        <button
-          type="button"
+        <a
+          href={content.routes.carrito}
           className="cart-checkout-button"
-          onClick={onCheckout}
-          disabled={cartItems.length === 0}
+          aria-disabled={cartItems.length === 0}
         >
           {content.catalogo.cart.checkoutLabel}
-        </button>
-      </div>
+        </a>
+      </div> */}
     </aside>
   );
 }

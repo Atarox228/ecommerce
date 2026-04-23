@@ -1,0 +1,140 @@
+/* Tarjetas del catálogo */
+
+.catalogo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.catalogo-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(1, 33, 58, 0.08);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.catalogo-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 34px rgba(1, 33, 58, 0.12);
+}
+
+.catalogo-card-image {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, #f8f4eb 0%, #e8edf4 100%);
+  overflow: hidden;
+}
+
+.catalogo-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.catalogo-card:hover .catalogo-card-image img {
+  transform: scale(1.04);
+}
+
+.catalogo-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.catalogo-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+}
+
+.catalogo-card-name {
+  min-height: 3.1em;
+  margin: 0;
+  color: var(--text);
+  font-size: 0.96rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.catalogo-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.catalogo-price-row strong {
+  color: var(--dark);
+  font-size: 1.28rem;
+  line-height: 1;
+}
+
+.catalogo-price-row del {
+  color: #8b98ad;
+  font-size: 0.9rem;
+}
+
+.catalogo-stock {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.catalogo-quantity-control {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.catalogo-qty-button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  cursor: pointer;
+  background: var(--bg-section);
+  color: var(--dark);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.catalogo-qty-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.catalogo-qty-value {
+  min-width: 44px;
+  text-align: center;
+  color: var(--text);
+  font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+  .catalogo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .catalogo-grid {
+    grid-template-columns: 1fr;
+  }
+}

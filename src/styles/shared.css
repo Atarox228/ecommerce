@@ -1,0 +1,133 @@
+/* Utilidades y variables compartidas */
+
+/* Botones */
+.btn-reset {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-base {
+  border: 0;
+  cursor: pointer;
+  border-radius: 12px;
+  min-height: 44px;
+  padding: 0 16px;
+  font-weight: 700;
+  transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, #25d366, #128c7e);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: var(--bg-section);
+  color: var(--dark);
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary:hover:not(:disabled),
+.btn-secondary:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+/* Cards */
+.card-base {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(217, 228, 244, 0.9);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(1, 33, 58, 0.06);
+}
+
+.card-content {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(217, 228, 244, 0.9);
+  border-radius: 24px;
+  box-shadow: 0 18px 40px rgba(1, 33, 58, 0.08);
+}
+
+/* Badges */
+.badge-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.badge-accent {
+  background: rgba(246, 185, 20, 0.14);
+  color: var(--dark);
+  font-size: 0.8rem;
+}
+
+.badge-count {
+  min-height: 30px;
+  padding: 0 10px;
+  background: rgba(246, 185, 20, 0.14);
+  color: var(--dark);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+/* Modales y banners */
+.banner-info {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.banner-warning {
+  border: 1px solid rgba(208, 139, 30, 0.35);
+  background: rgba(246, 185, 20, 0.14);
+  color: #7a4d04;
+  font-weight: 600;
+}
+
+/* Text */
+.text-muted {
+  color: var(--muted);
+}
+
+.text-dark {
+  color: var(--dark);
+}
+
+.text-error {
+  color: #ab3b2f;
+}
+
+.text-success {
+  color: #25d366;
+}
+
+.text-warning {
+  color: #d97706;
+}
+
+/* Layouts */
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.gap-sm { gap: 8px; }
+.gap-md { gap: 12px; }
+.gap-lg { gap: 16px; }
+.gap-xl { gap: 24px; }
