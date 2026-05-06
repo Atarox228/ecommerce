@@ -1,4 +1,4 @@
-import catalogoData from './mocks/catalogo.json';
+import ageRestrictionLogo from './assets/hero.png';
 
 export const content = {
   site: {
@@ -10,6 +10,7 @@ export const content = {
     home: '/',
     catalogo: '/catalogo',
     carrito: '/carrito',
+    edadRestringida: '/edad-restringida',
     promociones: '/#promociones',
     contacto: '/#contacto',
   },
@@ -130,22 +131,22 @@ export const content = {
   footer: {
     contactTitle: 'Contacto',
     contactItems: [
+      // {
+      //   label: 'Av. Libertador 1234, Ciudad',
+      //   href: 'https://www.google.com/maps/search/Av.+Libertador+1234,+Ciudad',
+      //   icon: '📍',
+      //   external: true,
+      // },
       {
-        label: 'Av. Libertador 1234, Ciudad',
-        href: 'https://www.google.com/maps/search/Av.+Libertador+1234,+Ciudad',
-        icon: '📍',
-        external: true,
-      },
-      {
-        label: '+54 11 1234-5678',
-        href: 'tel:+541112345678',
+        label: '+54 9 11 3161-5976',
+        href: 'tel:+549113161-5976',
         icon: '📞',
       },
-      {
-        label: 'ventas@fassbebidas.com',
-        href: 'mailto:ventas@fassbebidas.com',
-        icon: '📧',
-      },
+      // {
+      //   label: 'ventas@fassbebidas.com',
+      //   href: 'mailto:ventas@fassbebidas.com',
+      //   icon: '📧',
+      // },
       {
         label: '@fass.logistica',
         href: 'https://www.instagram.com/fass.logistica/',
@@ -164,7 +165,34 @@ export const content = {
     detailLabel: 'Ver detalle',
     detailHref: '/catalogo',
   },
-  catalogoData,
+  ageGate: {
+    storageKey: 'fass-age-verification',
+    badge: 'Acceso restringido',
+    title: 'Confirmá tu edad',
+    description: 'Este sitio web está dirigido solo a mayores de 18 años. Elegí una opción para continuar.',
+    adultPrompt: 'Soy Mayor de edad (+18)',
+    adultAction: 'Entrar',
+    minorPrompt: 'Soy Menor de edad (-18)',
+    minorAction: 'Salir',
+  },
+  ageRestriction: {
+    logoSrc: ageRestrictionLogo,
+    logoAlt: 'Logo de Fass Bebidas',
+    message: 'Este sitio web esta dirigido solo a mayor de 18 años',
+  },
+  // Load mocks only in development to avoid bundling them in production
+  catalogoData: (await (async () => {
+    if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV) {
+      try {
+        const mod = await import('./mocks/catalogo.json');
+        return mod.default ?? mod;
+      } catch (e) {
+        return { packs: [], promos: [] };
+      }
+    }
+
+    return { packs: [], promos: [] };
+  })()),
 };
 
 export default content;

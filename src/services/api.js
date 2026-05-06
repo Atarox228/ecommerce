@@ -1,6 +1,10 @@
 import { content } from '../content';
 
-const USE_MOCK = true;
+const USE_MOCK = false; // switch to false to use server proxy
+const LOCAL_STORAGE_VERSION = 3;
+const LOCAL_STORAGE_KEY = `catalogo:cache:v${LOCAL_STORAGE_VERSION}`;
+const LOCAL_STORAGE_TTL_MS = 1000 * 60 * 60; // 1 hour
+const PLACEHOLDER_IMAGE = 'https://picsum.photos/200/300?random=28';
 
 function normalizePrice(value) {
   if (typeof value !== 'number' || Number.isNaN(value)) {
@@ -35,16 +39,67 @@ export async function getCatalogo() {
     };
   }
 
-  const res = await fetch("/api/catalogo");
-  const data = await res.json();
+  try {
+    // try localStorage cache first
+    const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (parsed && parsed.ts && (Date.now() - parsed.ts) < LOCAL_STORAGE_TTL_MS && parsed.data) {
+          const data = parsed.data;
+          return {
+            ...data,
+            packs: (data.packs ?? []).map((p) => ({ ...p, imagen: p.imagen || PLACEHOLDER_IMAGE })).map(normalizeProduct),
+            promos: (data.promos ?? []).map(normalizePromo),
+            productos: (data.productos ?? []).map((p) => ({ ...p, imagen: p.imagen || PLACEHOLDER_IMAGE })).map(normalizeProduct),
+            categorias: data.categorias ?? [],
+          };
+        }
+      } catch (e) {
+        // ignore parse errors and continue to fetch
+      }
+    }
 
-  return {
-    ...data,
-    packs: (data.packs ?? []).map(normalizeProduct),
-    promos: (data.promos ?? []).map(normalizePromo),
-    productos: (data.productos ?? []).map(normalizeProduct),
-    categorias: data.categorias ?? [],
-  };
+    const res = await fetch('/api/catalogo');
+    if (!res.ok) {
+      throw new Error('Network response not ok');
+    }
+
+    const data = await res.json();
+
+    // ensure images fallback and store cache
+    const safeData = {
+      ...data,
+      packs: (data.packs ?? []).map((p) => ({ ...p, imagen: p.imagen || PLACEHOLDER_IMAGE })),
+      productos: (data.productos ?? []).map((p) => ({ ...p, imagen: p.imagen || PLACEHOLDER_IMAGE })),
+      promos: data.promos ?? [],
+      categorias: data.categorias ?? [],
+    };
+
+    try {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify({ ts: Date.now(), data: safeData }));
+    } catch (e) {
+      // ignore localStorage errors
+    }
+
+    return {
+      ...safeData,
+      packs: (safeData.packs ?? []).map(normalizeProduct),
+      promos: (safeData.promos ?? []).map(normalizePromo),
+      productos: (safeData.productos ?? []).map(normalizeProduct),
+      categorias: safeData.categorias ?? [],
+    };
+  } catch (err) {
+    // fallback to mocks if anything fails
+    console.warn('Failed to fetch catalogo from server, falling back to mocks', err);
+    return {
+      ...content.catalogoData,
+      packs: (content.catalogoData.packs ?? []).map((p) => ({ ...p, imagen: p.imagen || PLACEHOLDER_IMAGE })).map(normalizeProduct),
+      promos: (content.catalogoData.promos ?? []).map(normalizePromo),
+      productos: (content.catalogoData.productos ?? []).map((p) => ({ ...p, imagen: p.imagen || PLACEHOLDER_IMAGE })).map(normalizeProduct),
+      categorias: content.catalogoData.categorias ?? [],
+    };
+  }
 }
 
 export async function getCategorias() {
