@@ -12,7 +12,7 @@ function Home() {
       <Header />
       <main className="home-content">
         <WelcomeHero />
-        <OffersSection />
+        {/* <OffersSection /> */}
         <CombosSection />
       </main>
       <Footer />

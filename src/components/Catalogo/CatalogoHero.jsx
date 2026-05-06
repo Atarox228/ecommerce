@@ -13,13 +13,6 @@ function CatalogoHero({ itemsCount, filteredCount, maxPrice, formatPrice }) {
         <div>
           <p className="catalogo-eyebrow">{content.catalogo.eyebrow}</p>
           <h1>{content.catalogo.title}</h1>
-          <p className="catalogo-intro">
-            {content.catalogo.intro.lead}
-            <strong>{content.catalogo.intro.source}</strong>
-            {content.catalogo.intro.middle}
-            <strong>{content.catalogo.intro.service}</strong>
-            {content.catalogo.intro.tail}
-          </p>
         </div>
 
         <div className="catalogo-stats" aria-label="Resumen del catálogo">
