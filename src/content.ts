@@ -1,4 +1,5 @@
 import ageRestrictionLogo from './assets/hero.png';
+import './env.d.ts'
 
 export const content = {
   site: {
@@ -18,7 +19,7 @@ export const content = {
     { label: 'Inicio', href: '/' },
     { label: 'Catálogo', href: '/catalogo' },
     { label: 'Carrito', href: '/carrito' },
-    { label: 'Promociones', href: '/#promociones' },
+    // { label: 'Promociones', href: '/#promociones' },
     { label: 'Contacto', href: '/#contacto' },
   ],
   home: {
@@ -108,6 +109,7 @@ export const content = {
       totalLabel: 'Total',
       clearLabel: 'Vaciar carrito',
       checkoutLabel: 'Ir al carrito',
+      payLabel: 'Pagar',
       whatsappNumber: '1159045262',
       messageIntro: 'Hola, quiero hacer este pedido:',
       messageFooter: 'Quedo a la espera de la confirmación. Gracias.',

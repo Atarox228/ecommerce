@@ -9,6 +9,13 @@ function getItemTitle(item) {
   return item.nombre || item.name || item.title || '';
 }
 
+function normalizeCartItem(item) {
+  return {
+    ...item,
+    title: getItemTitle(item),
+  };
+}
+
 function formatPrice(value) {
   return new Intl.NumberFormat('es-AR').format(Math.round(value || 0));
 }
@@ -65,7 +72,7 @@ function readStoredState() {
     const parsed = JSON.parse(raw);
 
     return {
-      cartItems: Array.isArray(parsed.cartItems) ? parsed.cartItems : [],
+      cartItems: Array.isArray(parsed.cartItems) ? parsed.cartItems.map(normalizeCartItem) : [],
       paymentMethod: typeof parsed.paymentMethod === 'string' ? parsed.paymentMethod : '',
       orderSent: Boolean(parsed.orderSent),
     };

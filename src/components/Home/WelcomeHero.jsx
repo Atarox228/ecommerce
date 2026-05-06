@@ -9,9 +9,9 @@ function WelcomeHero() {
         <h1>{content.home.hero.title}</h1>
         <span className="hero-highlight">{content.home.hero.highlight}</span>
         <p>{content.home.hero.description}</p>
-        <a className="btn-primary" href={content.home.hero.ctaHref}>
+        {/* <a className="btn-primary" href={content.home.hero.ctaHref}>
           {content.home.hero.ctaLabel}
-        </a>
+        </a> */}
       </div>
     </section>
   );

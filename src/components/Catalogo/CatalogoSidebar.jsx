@@ -1,4 +1,4 @@
-import CartItem from '../CartItem';
+import { useEffect, useRef } from 'react';
 import { content } from '../../content';
 
 function CatalogoSidebar({
@@ -9,12 +9,36 @@ function CatalogoSidebar({
   formatPrice,
   cartItems,
   cartTotals,
-  onDecreaseQuantity,
-  onIncreaseQuantity,
-  onRemoveFromCart,
   onClearCart,
   orderSent,
 }) {
+  const cartItemsRef = useRef(null);
+
+  useEffect(() => {
+    if (!cartItemsRef.current) {
+      return;
+    }
+
+    const updateMaxHeight = () => {
+      // Find the catalogo-grid in the same layout
+      const layout = cartItemsRef.current?.closest('.catalogo-layout');
+      const grid = layout?.querySelector('.catalogo-grid');
+
+      if (grid) {
+        const gridHeight = grid.getBoundingClientRect().height;
+        cartItemsRef.current.style.maxHeight = `${gridHeight}px`;
+      }
+    };
+
+    // Update on mount and window resize
+    updateMaxHeight();
+    window.addEventListener('resize', updateMaxHeight);
+
+    return () => {
+      window.removeEventListener('resize', updateMaxHeight);
+    };
+  }, []);
+
   return (
     <aside className="catalogo-sidebar" aria-label="Filtros del catálogo">
       <div className="filter-card">
@@ -46,60 +70,54 @@ function CatalogoSidebar({
         </p>
       </div>
 
-      {/* <div className="filter-card cart-card">
-        <div className="cart-card-header">
-          <div>
-            <h2>{content.catalogo.cart.title}</h2>
-            <p className="sidebar-text">{content.catalogo.cart.subtitle}</p>
+      {cartItems.length > 0 && (
+        <div className="filter-card cart-card">
+          <div className="cart-card-header">
+            <div>
+              <h2>{content.catalogo.cart.title}</h2>
+              <p className="sidebar-text">{content.catalogo.cart.subtitle}</p>
+            </div>
+            <span className="cart-count-badge">
+              {cartTotals.quantity} {cartTotals.quantity === 1 ? content.catalogo.cart.itemLabel : content.catalogo.cart.itemsLabel}
+            </span>
           </div>
-          <span className="cart-count-badge">
-            {cartTotals.quantity} {cartTotals.quantity === 1 ? content.catalogo.cart.itemLabel : content.catalogo.cart.itemsLabel}
-          </span>
-        </div>
 
-        {cartItems.length === 0 ? (
-          <p className="cart-empty">{content.catalogo.cart.emptyState}</p>
-        ) : (
-          <div className="cart-items">
+          <ul className="cart-items" ref={cartItemsRef} aria-label={content.catalogo.cart.title}>
             {cartItems.map((cartItem) => (
-              <CartItem
-                key={cartItem.id}
-                item={cartItem}
-                onIncrease={onIncreaseQuantity}
-                onDecrease={onDecreaseQuantity}
-                onRemove={onRemoveFromCart}
-                disabled={orderSent}
-                compact
-              />
+              <li className="cart-item-row" key={cartItem.id}>
+                <span className="cart-item-title" title={cartItem.title}>
+                  {cartItem.title}
+                </span>
+                <span className="cart-item-quantity">x{cartItem.quantity}</span>
+              </li>
             ))}
-          </div>
-        )}
+          </ul>
 
-        {orderSent && <p className="cart-lock-message">{content.catalogo.cart.lockMessage}</p>}
+          {orderSent && <p className="cart-lock-message">{content.catalogo.cart.lockMessage}</p>}
 
-        <div className="cart-summary">
-          <div>
-            <span>{content.catalogo.cart.totalLabel}</span>
-            <strong>${formatPrice(cartTotals.subtotal)}</strong>
+          <div className="cart-summary">
+            <div>
+              <span>{content.catalogo.cart.totalLabel}</span>
+              <strong>${formatPrice(cartTotals.subtotal)}</strong>
+            </div>
+            <button
+              type="button"
+              className="cart-clear-button"
+              onClick={onClearCart}
+              disabled={cartItems.length === 0 || orderSent}
+            >
+              {content.catalogo.cart.clearLabel}
+            </button>
           </div>
-          <button
-            type="button"
-            className="cart-clear-button"
-            onClick={onClearCart}
-            disabled={cartItems.length === 0 || orderSent}
+
+          <a
+            href={content.routes.carrito}
+            className="cart-checkout-button"
           >
-            {content.catalogo.cart.clearLabel}
-          </button>
+            {content.catalogo.cart.payLabel}
+          </a>
         </div>
-
-        <a
-          href={content.routes.carrito}
-          className="cart-checkout-button"
-          aria-disabled={cartItems.length === 0}
-        >
-          {content.catalogo.cart.checkoutLabel}
-        </a>
-      </div> */}
+      )}
     </aside>
   );
 }

@@ -34,7 +34,6 @@ function Catalogo() {
     addItem,
     increaseQuantity,
     decreaseQuantity,
-    removeItem,
     clearCart,
     getItemQuantity,
   } = useCart();
@@ -177,9 +176,6 @@ function Catalogo() {
             formatPrice={formatPrice}
             cartItems={cartItems}
             cartTotals={totals}
-            onDecreaseQuantity={decreaseQuantity}
-            onIncreaseQuantity={increaseQuantity}
-            onRemoveFromCart={removeItem}
             onClearCart={clearCart}
             orderSent={orderSent}
           />
