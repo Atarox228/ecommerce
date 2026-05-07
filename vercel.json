@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/catalogo",
+      "destination": "/api/catalogo"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

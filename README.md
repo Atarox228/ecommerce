@@ -1,16 +1,53 @@
-# React + Vite
+# Ecommerce Tia
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación de ecommerce construida con React + Vite, con un backend ligero para leer el catálogo desde Google Sheets.
 
-Currently, two official plugins are available:
+## Desarrollo local
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Instala dependencias y levanta el frontend:
 
-## React Compiler
+```bash
+npm install
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Si quieres usar el proxy local del catálogo, ejecuta también:
 
-## Expanding the ESLint configuration
+```bash
+npm run start:server
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+El frontend consume el endpoint `/api/catalogo`, que en local responde desde `server.js` y en Vercel desde la función serverless.
+
+## Variables de entorno
+
+El backend necesita estas variables:
+
+- `SHEET_ID`: ID de la hoja de Google Sheets.
+- `GID`: gid de la pestaña que contiene el catálogo.
+- `CACHE_TTL_SECONDS`: tiempo de caché en segundos. Opcional, por defecto `3600`.
+
+Puedes definirlas en un archivo `.env` para desarrollo local y en las Environment Variables de Vercel para producción.
+
+## Deploy en Vercel
+
+Este proyecto está preparado para desplegarse como una SPA con una función serverless para el catálogo.
+
+1. Sube el repositorio a Vercel.
+2. Usa la configuración por defecto de Vite para el frontend.
+3. Define las variables `SHEET_ID`, `GID` y `CACHE_TTL_SECONDS` en el proyecto de Vercel.
+4. La ruta `/api/catalogo` se resuelve con `api/catalogo.js`.
+5. Las rutas del frontend se reescriben a `index.html` para evitar errores al recargar páginas.
+
+## Estructura relevante
+
+- `server.js`: servidor Express para desarrollo local.
+- `catalogo-service.js`: lógica compartida para leer y normalizar el catálogo.
+- `api/catalogo.js`: función serverless para Vercel.
+- `vercel.json`: rewrites para la SPA.
+
+## Build
+
+```bash
+npm run build
+```
