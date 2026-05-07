@@ -110,7 +110,7 @@ export const content = {
       clearLabel: 'Vaciar carrito',
       checkoutLabel: 'Ir al carrito',
       payLabel: 'Pagar',
-      whatsappNumber: '+1159045262',
+      whatsappNumber: '+54 9 11 5904-5262',
       messageIntro: 'Hola, quiero hacer este pedido:',
       messageFooter: 'Quedo a la espera de la confirmación. Gracias.',
       quantityLabel: 'Cantidad',

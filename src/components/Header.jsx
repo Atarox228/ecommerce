@@ -30,8 +30,10 @@ function Header() {
     <header className="header">
       <nav className="header-nav">
         <div className="header-brand-row">
-          <img src={logoFass} alt="Fass Bebidas Logo" className="header-logo" />
-          <h1 className="header-brand">{content.site.name}</h1>
+          <a href={content.routes.home} className="header-brand-link" aria-label="Ir al inicio">
+            <img src={logoFass} alt="Fass Bebidas Logo" className="header-logo" />
+            <h1 className="header-brand">{content.site.name}</h1>
+          </a>
           <button
             type="button"
             className="header-toggle"

@@ -28,6 +28,14 @@ function Carrito() {
 
   const canSend = cartItems.length > 0 && paymentMethod && !orderSent;
 
+  const handleRestartOrder = () => {
+    restartOrder();
+
+    if (typeof window !== 'undefined') {
+      window.location.href = content.routes.catalogo;
+    }
+  };
+
   return (
     <div className="carrito-page">
       <Header />
@@ -97,7 +105,7 @@ function Carrito() {
                 </button>
 
                 {orderSent && (
-                  <button type="button" className="carrito-secondary-btn" onClick={restartOrder}>
+                  <button type="button" className="carrito-secondary-btn" onClick={handleRestartOrder}>
                     {content.catalogo.cart.restartLabel}
                   </button>
                 )}

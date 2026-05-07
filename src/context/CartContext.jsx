@@ -49,6 +49,28 @@ function buildWhatsAppMessage(cartItems, subtotal, totalQuantity, paymentMethodL
   return lines.join('\n');
 }
 
+function normalizeWhatsAppNumber(rawNumber) {
+  const digits = String(rawNumber || '').replace(/\D/g, '');
+
+  if (!digits) {
+    return '';
+  }
+
+  if (digits.startsWith('549')) {
+    return digits;
+  }
+
+  if (digits.startsWith('54')) {
+    return `549${digits.slice(2)}`;
+  }
+
+  if (digits.length === 10 && digits.startsWith('11')) {
+    return `549${digits}`;
+  }
+
+  return digits;
+}
+
 function readStoredState() {
   if (typeof window === 'undefined') {
     return {
@@ -254,7 +276,13 @@ export function CartProvider({ children }) {
       totals.adjustmentPercentage,
     );
 
-    const whatsappUrl = `https://wa.me/${content.catalogo.cart.whatsappNumber}?text=${encodeURIComponent(message)}`;
+    const normalizedPhone = normalizeWhatsAppNumber(content.catalogo.cart.whatsappNumber);
+
+    if (!normalizedPhone) {
+      return false;
+    }
+
+    const whatsappUrl = `https://wa.me/${normalizedPhone}?text=${encodeURIComponent(message)}`;
 
     setOrderSent(true);
     persistState({
