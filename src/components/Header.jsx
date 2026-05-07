@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { content } from '../content';
+import logoFass from '../assets/logoFass.webp';
 import '../styles/header.css';
 
 function Header() {
@@ -29,6 +30,7 @@ function Header() {
     <header className="header">
       <nav className="header-nav">
         <div className="header-brand-row">
+          <img src={logoFass} alt="Fass Bebidas Logo" className="header-logo" />
           <h1 className="header-brand">{content.site.name}</h1>
           <button
             type="button"

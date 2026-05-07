@@ -1,4 +1,4 @@
-import ageRestrictionLogo from './assets/hero.png';
+import ageRestrictionLogo from './assets/logoFass.webp';
 import './env.d.ts'
 
 export const content = {
