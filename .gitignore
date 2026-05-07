@@ -22,6 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.env
 
 web_coder
 GOOGLE_SHEETS_INTEGRATION.md
