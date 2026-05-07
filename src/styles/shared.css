@@ -19,7 +19,7 @@
 }
 
 .btn-primary {
-  background: linear-gradient(120deg, #25d366, #128c7e);
+  background: linear-gradient(120deg, #ca9841, #a37037);
   color: #fff;
 }
 
@@ -89,8 +89,8 @@
 }
 
 .banner-warning {
-  border: 1px solid rgba(208, 139, 30, 0.35);
-  background: rgba(246, 185, 20, 0.14);
+  border: 1px solid rgba(149, 108, 42, 0.35);
+  background: rgba(163, 112, 55, 0.14);
   color: #7a4d04;
   font-weight: 600;
 }

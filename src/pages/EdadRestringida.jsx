@@ -1,15 +1,16 @@
 import { content } from '../content';
+import '../styles/edad-restringida.css';
 
 function EdadRestringida() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-950 px-6 py-10 text-white">
-      <section className="flex max-w-md flex-col items-center gap-6 text-center">
+    <main className="edad-restringida">
+      <section className="edad-restringida-content">
         <img
           src={content.ageRestriction.logoSrc}
           alt={content.ageRestriction.logoAlt}
-          className="h-auto w-full max-w-xs object-contain"
+          className="edad-restringida-logo"
         />
-        <p className="text-lg font-medium leading-8 text-slate-100 sm:text-xl">{content.ageRestriction.message}</p>
+        <p className="edad-restringida-message">{content.ageRestriction.message}</p>
       </section>
     </main>
   );
