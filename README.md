@@ -1,4 +1,4 @@
-# Ecommerce Tia
+# Ecommerce
 
 Aplicación de ecommerce construida con React + Vite, con un backend ligero para leer el catálogo desde Google Sheets.
 
