@@ -1,5 +1,4 @@
-import ageRestrictionLogo from './assets/logoFassGrande.webp';
-import './env.d.ts'
+import './env.d.ts';
 
 export const content = {
   site: {
@@ -81,7 +80,8 @@ export const content = {
       maxLabel: 'Máximo',
       activeRangePrefix: 'Rango activo:',
       stateTitle: 'Estado',
-      stateText: 'Se muestran solo productos activos. Las promos sin coincidencia en el mock se ignoran.',
+      stateText:
+        'Se muestran solo productos activos. Las promos sin coincidencia en el mock se ignoran.',
     },
     results: {
       loadingSummary: 'Cargando catálogo...',
@@ -171,19 +171,19 @@ export const content = {
     storageKey: 'fass-age-verification',
     badge: 'Acceso restringido',
     title: 'Confirmá tu edad',
-    description: 'Este sitio web está dirigido solo a mayores de 18 años. Elegí una opción para continuar.',
+    description:
+      'Este sitio web de FASS BEBIDAS está dirigido exclusivamente a personas mayores de 18 años. Seleccioná tu edad para continuar.',
     adultPrompt: 'Soy Mayor de edad (+18)',
-    adultAction: 'Entrar',
+    adultAction: 'Entrar y ver el sitio',
     minorPrompt: 'Soy Menor de edad (-18)',
-    minorAction: 'Salir',
+    minorAction: 'No puedo ingresar',
+    minorRedirect: 'https://fada-argentina.org.ar/menores-ni-una-gota/',
   },
   ageRestriction: {
-    logoSrc: ageRestrictionLogo,
-    logoAlt: 'Logo de Fass Bebidas',
     message: 'Este sitio web esta dirigido solo a mayor de 18 años',
   },
   // Load mocks only in development to avoid bundling them in production
-  catalogoData: (await (async () => {
+  catalogoData: await (async () => {
     if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV) {
       try {
         const mod = await import('./mocks/catalogo.json');
@@ -194,7 +194,7 @@ export const content = {
     }
 
     return { packs: [], promos: [] };
-  })()),
+  })(),
 };
 
 export default content;

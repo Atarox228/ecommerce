@@ -23,6 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 .env
-
-web_coder
+.agents
+.web_coder
+skills-lock.json
+AGENTS.md
+.github*
 GOOGLE_SHEETS_INTEGRATION.md
+web_coder/*
+.prettierrc
