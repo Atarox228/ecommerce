@@ -35,16 +35,8 @@ function App() {
   const handleMinorAccess = () => {
     window.localStorage.removeItem(content.ageGate.storageKey);
     setAgeStatus('minor');
-    window.history.pushState({}, '', content.routes.edadRestringida);
+    window.location.href = content.ageGate.minorRedirect;
   };
-
-  if (ageStatus === 'minor' || isAgeRestrictionRoute) {
-    return (
-      <CartProvider>
-        <EdadRestringida />
-      </CartProvider>
-    );
-  }
 
   return (
     <CartProvider>

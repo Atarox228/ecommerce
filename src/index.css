@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-primary-dark: #01223c;
@@ -13,7 +13,7 @@
   --color-bg-section: #f0f4fb;
   --color-bg-dark: #01213a;
 
-  --font-sans: Poppins, "Segoe UI", Roboto, sans-serif;
+  --font-sans: Poppins, 'Segoe UI', Roboto, sans-serif;
   --radius-DEFAULT: 10px;
   --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
@@ -25,8 +25,8 @@
   --bg-section: #f0f4fb;
   --border: #d9e4f4;
   --shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  --sans: "Poppins", "Segoe UI", Roboto, sans-serif;
-  --heading: "Poppins", "Segoe UI", Roboto, sans-serif;
+  --sans: 'Poppins', 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Poppins', 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
   --accent: #f6b914;
   --accent-dark: #d19d0a;
