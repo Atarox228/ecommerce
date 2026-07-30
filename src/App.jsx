@@ -6,6 +6,8 @@ import EdadRestringida from './pages/EdadRestringida';
 import AgeGateModal from './components/AgeGateModal';
 import { content } from './content';
 import { CartProvider } from './context/CartContext';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
@@ -40,6 +42,7 @@ function App() {
 
   return (
     <CartProvider>
+      <Header />
       {pathname === content.routes.catalogo && <Catalogo />}
       {pathname === content.routes.carrito && <Carrito />}
       {pathname !== content.routes.catalogo && pathname !== content.routes.carrito && <Home />}
@@ -56,6 +59,7 @@ function App() {
           onMinorAccess={handleMinorAccess}
         />
       )}
+      <Footer />
     </CartProvider>
   );
 }

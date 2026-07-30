@@ -2,13 +2,23 @@ import React from 'react';
 import { content } from '../../content';
 import '../../styles/product-card.css';
 
-function ProductCard({ product, isOffer = false, isCategory = false, isCombo = false }) {
+function ProductCard({
+  product,
+  isOffer = false,
+  isCategory = false,
+  isCombo = false,
+  onAddToCart,
+  onIncreaseQuantity,
+  onDecreaseQuantity,
+  getItemQuantity,
+  orderSent,
+}) {
   // Soportar ambos formatos: "imagen"/"nombre" (del mock) y "image"/"name"
   const name = product.nombre || product.name;
   const image = product.imagen || product.image;
   const price = product.precio || product.price;
   const description = product.descripcion || product.description;
-
+  const quantity = getItemQuantity(product.id);
   if (isCategory) {
     return (
       <div className="product-card category-card hover:shadow-md transitoin-transform duration-300">
@@ -23,10 +33,10 @@ function ProductCard({ product, isOffer = false, isCategory = false, isCombo = f
   }
 
   return (
-    <div className="product-card hover:shadow-md transition-transform duration-300">
-      {isOffer && product.discount && (
-        <span className="discount-badge">{product.discount}%</span>
-      )}
+    <div
+      className={`product-card hover:shadow-md transition-transform duration-300 ${product.stock ? '' : 'brightness-55'}`}
+    >
+      {isOffer && product.discount && <span className="discount-badge">{product.discount}%</span>}
       <div className="product-image">
         <img src={image} alt={name} className="w-full h-full object-cover" />
       </div>
@@ -41,12 +51,29 @@ function ProductCard({ product, isOffer = false, isCategory = false, isCombo = f
         {!isOffer && <p className="price">${price}</p>}
         {description && <p className="description">{description}</p>}
         {isCombo && (
-          <a
-            href={content.productCard.detailHref}
-            className="combo-button inline-block bg-blue-900 hover:bg-blue-800 text-white py-2 px-3 rounded text-xs sm:text-sm font-semibold transition-colors duration-300"
-          >
-            {content.productCard.detailLabel}
-          </a>
+          <div className="catalogo-quantity-control" aria-label={`Control de cantidad de ${name}`}>
+            <button
+              type="button"
+              className="catalogo-qty-button"
+              onClick={() => onDecreaseQuantity(product.id)}
+              disabled={quantity === 0 || orderSent}
+              aria-label={`Quitar una unidad de ${name}`}
+            >
+              -
+            </button>
+            <span className="catalogo-qty-value">{quantity}</span>
+            <button
+              type="button"
+              className="catalogo-qty-button"
+              onClick={() =>
+                quantity === 0 ? onAddToCart(product) : onIncreaseQuantity(product.id)
+              }
+              disabled={!product.stock}
+              aria-label={`Agregar una unidad de ${name}`}
+            >
+              +
+            </button>
+          </div>
         )}
       </div>
     </div>

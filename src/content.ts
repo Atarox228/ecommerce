@@ -15,11 +15,9 @@ export const content = {
     contacto: '/#contacto',
   },
   navLinks: [
-    { label: 'Inicio', href: '/' },
     { label: 'Catálogo', href: '/catalogo' },
+    // { label: 'Promociones', href: '/promociones' },
     { label: 'Carrito', href: '/carrito' },
-    // { label: 'Promociones', href: '/#promociones' },
-    { label: 'Contacto', href: '/#contacto' },
   ],
   home: {
     hero: {
@@ -27,8 +25,8 @@ export const content = {
       highlight: 'mejor precio',
       description:
         'Distribuidor oficial de vinos, licores, cervezas y bebidas espirituosas. Envíos en el día para tus eventos.',
-      ctaLabel: 'Ver Ofertas del Mes',
-      ctaHref: '/#promociones',
+      ctaLabel: 'Ver catálogo y ofertas',
+      ctaHref: '/catalogo',
     },
     categories: {
       title: 'Nuestras Categorías',

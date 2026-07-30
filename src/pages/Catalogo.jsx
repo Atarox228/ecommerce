@@ -1,6 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import CatalogoHero from '../components/Catalogo/CatalogoHero';
 import CatalogoToolbar from '../components/Catalogo/CatalogoToolbar';
 import CatalogoSidebar from '../components/Catalogo/CatalogoSidebar';
@@ -52,7 +50,9 @@ function Catalogo() {
 
       setItems(data);
 
-      const prices = data.map((item) => item.price ?? item.precio).filter((price) => Number.isFinite(price));
+      const prices = data
+        .map((item) => item.price ?? item.precio)
+        .filter((price) => Number.isFinite(price));
       const min = prices.length > 0 ? Math.min(...prices) : 0;
       const max = prices.length > 0 ? Math.max(...prices) : 0;
 
@@ -70,7 +70,9 @@ function Catalogo() {
   }, []);
 
   const availableRange = useMemo(() => {
-    const prices = items.map((item) => item.price ?? item.precio).filter((price) => Number.isFinite(price));
+    const prices = items
+      .map((item) => item.price ?? item.precio)
+      .filter((price) => Number.isFinite(price));
 
     if (prices.length === 0) {
       return { min: 0, max: 0 };
@@ -104,7 +106,9 @@ function Catalogo() {
         sorted.sort((a, b) => (b.price ?? b.precio ?? 0) - (a.price ?? a.precio ?? 0));
         break;
       case 'nombre-asc':
-        sorted.sort((a, b) => (a.nombre || a.name || '').localeCompare(b.nombre || b.name || '', 'es'));
+        sorted.sort((a, b) =>
+          (a.nombre || a.name || '').localeCompare(b.nombre || b.name || '', 'es'),
+        );
         break;
       case 'destacados':
       default:
@@ -150,8 +154,6 @@ function Catalogo() {
 
   return (
     <div className="catalogo-page">
-      <Header />
-
       <main className="catalogo-main">
         <CatalogoHero
           itemsCount={items.length}
@@ -196,8 +198,6 @@ function Catalogo() {
           />
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

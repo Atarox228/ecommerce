@@ -25,7 +25,7 @@ body {
 }
 
 #root {
-  width: 100%;  
+  width: 100%;
   margin: 0 auto;
   min-height: 100vh;
 }
@@ -175,7 +175,9 @@ body {
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
-  transition: transform .2s ease, box-shadow .2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .btn-primary:hover {
@@ -227,7 +229,9 @@ body {
   overflow: hidden;
   box-shadow: var(--shadow);
   position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .product-card:hover {
@@ -235,7 +239,9 @@ body {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.14);
 }
 
-.product-card.category-card { min-height: 240px; }
+.product-card.category-card {
+  min-height: 240px;
+}
 
 .product-image {
   width: 100%;
@@ -285,7 +291,7 @@ body {
   font-weight: 800;
   border-radius: 999px;
   padding: 6px 12px;
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 .product-info .description {
@@ -351,7 +357,9 @@ body {
     justify-content: center;
   }
 
-  .home-content { gap: 40px; }
+  .home-content {
+    gap: 40px;
+  }
 }
 
 .hero {
@@ -379,8 +387,7 @@ body {
     z-index: 1;
     top: 34px;
     height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
+    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg) scale(1.4);
   }
 
   .vite {
@@ -388,8 +395,7 @@ body {
     top: 107px;
     height: 26px;
     width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
+    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg) scale(0.8);
   }
 }
 

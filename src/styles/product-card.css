@@ -1,11 +1,13 @@
 .product-card {
   background: #fff;
   border: 1px solid #e5e8ef;
-  border-radius: var(--radius);
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: var(--shadow);
   position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
 }
@@ -41,13 +43,14 @@
 
 .product-info h3 {
   margin: 0 0 8px;
-  font-size: 1.05rem;
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .price {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--dark-2);
+  color: var(--accent-dark);
   margin-bottom: 4px;
 }
 
@@ -79,7 +82,7 @@
 
 .combo-button {
   display: inline-block;
-  background: #052f65;
+  background: #072d5f;
   color: #fff;
   padding: 8px 12px;
   border-radius: 6px;
@@ -92,7 +95,7 @@
 }
 
 .combo-button:hover {
-  background: #0f3a66;
+  background: #124980;
 }
 
 .category-card .product-image {
