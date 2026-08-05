@@ -1,5 +1,3 @@
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import CartItem from '../components/CartItem';
 import PaymentSelector from '../components/Carrito/PaymentSelector';
 import PriceBreakdown from '../components/Carrito/PriceBreakdown';
@@ -38,8 +36,6 @@ function Carrito() {
 
   return (
     <div className="carrito-page">
-      <Header />
-
       <main className="carrito-main">
         <section className="carrito-card" aria-labelledby="carrito-title">
           <div className="carrito-head">
@@ -48,7 +44,9 @@ function Carrito() {
               <h1 id="carrito-title">{content.catalogo.cart.cartPageTitle}</h1>
               <p className="carrito-intro">{content.catalogo.cart.cartPageIntro}</p>
             </div>
-            <a href={content.routes.catalogo} className="carrito-back-link">Seguir comprando</a>
+            <a href={content.routes.catalogo} className="carrito-back-link">
+              Seguir comprando
+            </a>
           </div>
 
           {orderSent && (
@@ -60,7 +58,9 @@ function Carrito() {
           {cartItems.length === 0 ? (
             <div className="carrito-empty">
               <p>{content.catalogo.cart.emptyState}</p>
-              <a href={content.routes.catalogo} className="carrito-primary-link">Ir al catálogo</a>
+              <a href={content.routes.catalogo} className="carrito-primary-link">
+                Ir al catálogo
+              </a>
             </div>
           ) : (
             <>
@@ -105,7 +105,11 @@ function Carrito() {
                 </button>
 
                 {orderSent && (
-                  <button type="button" className="carrito-secondary-btn" onClick={handleRestartOrder}>
+                  <button
+                    type="button"
+                    className="carrito-secondary-btn"
+                    onClick={handleRestartOrder}
+                  >
                     {content.catalogo.cart.restartLabel}
                   </button>
                 )}
@@ -114,8 +118,6 @@ function Carrito() {
           )}
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

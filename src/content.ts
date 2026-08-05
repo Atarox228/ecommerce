@@ -15,11 +15,9 @@ export const content = {
     contacto: '/#contacto',
   },
   navLinks: [
-    { label: 'Inicio', href: '/' },
     { label: 'Catálogo', href: '/catalogo' },
+    // { label: 'Promociones', href: '/promociones' },
     { label: 'Carrito', href: '/carrito' },
-    // { label: 'Promociones', href: '/#promociones' },
-    { label: 'Contacto', href: '/#contacto' },
   ],
   home: {
     hero: {
@@ -27,8 +25,8 @@ export const content = {
       highlight: 'mejor precio',
       description:
         'Distribuidor oficial de vinos, licores, cervezas y bebidas espirituosas. Envíos en el día para tus eventos.',
-      ctaLabel: 'Ver Ofertas del Mes',
-      ctaHref: '/#promociones',
+      ctaLabel: 'Ver catálogo y ofertas',
+      ctaHref: '/catalogo',
     },
     categories: {
       title: 'Nuestras Categorías',
@@ -142,7 +140,7 @@ export const content = {
       {
         label: '+54 9 11 3161-5976',
         href: 'tel:+549113161-5976',
-        icon: '📞',
+        type: 'phone',
       },
       // {
       //   label: 'ventas@fassbebidas.com',
@@ -152,7 +150,7 @@ export const content = {
       {
         label: '@fass.logistica',
         href: 'https://www.instagram.com/fass.logistica/',
-        icon: '📱',
+        type: 'socials',
         external: true,
       },
     ],

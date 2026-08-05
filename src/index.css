@@ -21,7 +21,7 @@
 :root {
   --text: #1e2f4f;
   --text-h: #d6aa2a;
-  --bg: #f5f8ff;
+  --bg: #1d2225;
   --bg-section: #f0f4fb;
   --border: #d9e4f4;
   --shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
@@ -46,6 +46,31 @@ html {
   scroll-behavior: smooth;
 }
 
+.golden-text {
+  background: linear-gradient(to right, #946a44, #e2bc83 55%, #946a44) !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+}
+.golden-text-on-hover:hover {
+  background: linear-gradient(to right, #946a44, #e2bc83 55%, #946a44) !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+}
+.golden-background {
+  background: linear-gradient(to right, #55402c, #e2bc83 55%, #55402c) !important;
+}
+svg {
+  --start-color: #4facfe;
+  --end-color: #00f2fe;
+}
+
+svg:hover {
+  --start-color: #f093fb;
+  --end-color: #f5576c;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -56,26 +81,6 @@ body {
 #root {
   width: 100%;
   min-height: 100vh;
-  padding: 0 16px;
-}
-
-/* Mobile-first responsive */
-@media (max-width: 640px) {
-  #root {
-    padding: 0 12px;
-  }
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
-  #root {
-    padding: 0 20px;
-  }
-}
-
-@media (min-width: 1025px) {
-  #root {
-    padding: 0 32px;
-  }
 }
 
 h1,

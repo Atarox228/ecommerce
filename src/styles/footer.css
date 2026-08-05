@@ -1,43 +1,55 @@
 .footer {
-  background: linear-gradient(135deg, #01213a 0%, #052f65 100%);
+  background:
+    radial-gradient(circle at 5% 95%, rgba(145, 110, 14, 0.225), transparent 14%),
+    radial-gradient(circle at 15% 85%, rgba(9, 3, 34, 1), transparent 22%),
+    radial-gradient(circle at 95% 15%, rgba(145, 110, 14, 0.05), transparent 14%),
+    radial-gradient(circle at 70% 20%, rgba(60, 15, 145, 0.463), transparent 22%),
+    radial-gradient(circle at 82% 20%, rgba(82, 166, 255, 0.06), transparent 22%),
+    radial-gradient(circle at 80% 15%, rgba(119, 175, 238, 0.05) 3%, transparent 14%),
+    radial-gradient(circle at 85% 90%, rgba(246, 185, 20, 0.05), transparent 14%),
+    linear-gradient(135deg, #01030c 0%, #090f2e, #091c2b 60%, #030c15 100%);
   color: #fff;
-  padding: 30px 16px;
-  margin-top: 40px;
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (min-width: 641px) {
   .footer {
-    padding: 40px 20px;
-    margin-top: 50px;
+    flex-direction: column;
+    padding: 10px 20px;
   }
 }
 
 @media (min-width: 1025px) {
   .footer {
-    padding: 50px 32px;
-    margin-top: 60px;
+    padding: 50px 32px 20px;
   }
 }
 
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr;
+  padding: 0 0 20px;
+  display: flex;
   gap: 24px;
 }
 
 @media (min-width: 641px) {
   .footer-content {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 64px;
   }
 }
 
 @media (min-width: 1025px) {
   .footer-content {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 64px;
   }
 }
 
@@ -76,17 +88,14 @@
   color: #e0e8f0;
   text-decoration: none;
   transition: color 0.3s ease;
-}
-
-.footer-section ul li a:hover {
-  color: #f6b914;
+  display: flex;
+  align-items: center;
 }
 
 .footer-bottom {
   text-align: center;
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: 20px;
   font-size: 0.85rem;
   color: #b0bcc9;
 }
@@ -94,14 +103,19 @@
 @media (min-width: 641px) {
   .footer-bottom {
     padding-top: 24px;
-    margin-top: 24px;
     font-size: 0.9rem;
   }
 }
 
 @media (min-width: 1025px) {
   .footer-bottom {
-    padding-top: 30px;
-    margin-top: 30px;
+    padding: 20px 0 0;
+    width: 100%;
   }
+}
+.footer-section svg {
+  width: 32px;
+  height: 32px;
+  --gradient-from: rgb(110, 90, 63);
+  --gradient-to: rgb(202, 169, 124);
 }
