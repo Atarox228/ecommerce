@@ -2,11 +2,18 @@ function Cart(props) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>
       <defs>
-        <linearGradient id="golden-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="5%" stopColor="#9a612c" />
-          <stop offset="35%" stopColor="#f5bc66" />
-          <stop offset="65%" stopColor="#f5bc66" />
-          <stop offset="95%" stopColor="#9a612c" />
+        <linearGradient
+          id="golden-gradient"
+          gradientUnits="userSpaceOnUse"
+          x1="0"
+          y1="0"
+          x2="24"
+          y2="0"
+          gradientTransform="rotate(155, 11.5, 8)"
+        >
+          <stop offset="10%" stopColor="rgb(110, 90, 63)" />
+          <stop offset="50%" stopColor="rgb(202, 169, 124)" />
+          <stop offset="90%" stopColor="rgb(110, 90, 63)" />
         </linearGradient>
       </defs>
 

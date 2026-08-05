@@ -140,7 +140,7 @@ export const content = {
       {
         label: '+54 9 11 3161-5976',
         href: 'tel:+549113161-5976',
-        icon: '📞',
+        type: 'phone',
       },
       // {
       //   label: 'ventas@fassbebidas.com',
@@ -150,7 +150,7 @@ export const content = {
       {
         label: '@fass.logistica',
         href: 'https://www.instagram.com/fass.logistica/',
-        icon: '📱',
+        type: 'socials',
         external: true,
       },
     ],

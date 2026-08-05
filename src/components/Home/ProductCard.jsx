@@ -1,6 +1,6 @@
 import React from 'react';
-import { content } from '../../content';
 import '../../styles/product-card.css';
+import Bag from '../Icons/Bag';
 
 function ProductCard({
   product,
@@ -34,8 +34,14 @@ function ProductCard({
 
   return (
     <div
-      className={`product-card hover:shadow-md transition-transform duration-300 ${product.stock ? '' : 'brightness-55'}`}
+      className={`product-card hover:shadow-md transition-transform duration-300 ${product.stock ? '' : 'brightness-55'} ${quantity > 0 ? 'product-added' : ''}`}
     >
+      {quantity > 0 && (
+        <div className="product-bag-icon">
+          <Bag />
+          <span>{quantity}</span>
+        </div>
+      )}
       {isOffer && product.discount && <span className="discount-badge">{product.discount}%</span>}
       <div className="product-image">
         <img src={image} alt={name} className="w-full h-full object-cover" />
@@ -50,32 +56,26 @@ function ProductCard({
         )}
         {!isOffer && <p className="price">${price}</p>}
         {description && <p className="description">{description}</p>}
-        {isCombo && (
-          <div className="catalogo-quantity-control" aria-label={`Control de cantidad de ${name}`}>
-            <button
-              type="button"
-              className="catalogo-qty-button"
-              onClick={() => onDecreaseQuantity(product.id)}
-              disabled={quantity === 0 || orderSent}
-              aria-label={`Quitar una unidad de ${name}`}
-            >
-              -
-            </button>
-            <span className="catalogo-qty-value">{quantity}</span>
-            <button
-              type="button"
-              className="catalogo-qty-button"
-              onClick={() =>
-                quantity === 0 ? onAddToCart(product) : onIncreaseQuantity(product.id)
-              }
-              disabled={!product.stock}
-              aria-label={`Agregar una unidad de ${name}`}
-            >
-              +
-            </button>
-          </div>
-        )}
       </div>
+      {isCombo && (
+        <div className="product-quantity-control" aria-label={`Control de cantidad de ${name}`}>
+          <button
+            type="button"
+            className="product-minus-button"
+            onClick={() => onDecreaseQuantity(product.id)}
+            disabled={quantity === 0 || orderSent}
+            aria-label={`Quitar una unidad de ${name}`}
+          ></button>
+          <span className={`product-qty-value ${quantity > 0 ? 'active' : ''}`}>{quantity}</span>
+          <button
+            type="button"
+            className="product-plus-button"
+            onClick={() => (quantity === 0 ? onAddToCart(product) : onIncreaseQuantity(product.id))}
+            disabled={!product.stock}
+            aria-label={`Agregar una unidad de ${name}`}
+          ></button>
+        </div>
+      )}
     </div>
   );
 }

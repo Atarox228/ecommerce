@@ -6,23 +6,46 @@
 .section-header h2 {
   font-size: 1.75rem;
   margin-bottom: 8px;
-  color: #1e2f4f;
+  color: rgb(201, 185, 163);
 }
 
-.section-subtitle {
-  color: #546e8f;
-  font-size: 0.9rem;
-  line-height: 1.6;
+.section-header h3 {
+  color: rgb(165, 150, 129);
+  font-size: 2rem;
   margin: 0 auto 24px;
   text-align: center;
   max-width: 720px;
 }
-
+.section-button {
+  border: 1px solid #e2bc83;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #000103 !important;
+  text-decoration: none;
+  padding: 8px 24px;
+  box-shadow:
+    0 3px 18px rgba(20, 12, 6, 0.45),
+    inset 0 -1px 6px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(226, 188, 131, 0.5);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+}
 .categories-section,
 .offers-section,
 .combos-section {
-  padding: 30px 16px;
-  margin-bottom: 20px;
+  background:
+    radial-gradient(circle at 15% 95%, rgba(145, 110, 14, 0.225), transparent 14%),
+    radial-gradient(circle at 5% 55%, rgba(16, 35, 97, 0.425), transparent 34%),
+    radial-gradient(circle at 95% 25%, rgba(145, 110, 14, 0.225), transparent 34%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .section-container {
+    padding: 40px 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding: 30px 16px;
+  }
 }
 
 .categories-grid,
@@ -41,12 +64,15 @@
 
 .combos-grid {
   grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 16px;
+  width: 100%;
 }
 
 .section-footer {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .section-footer .btn-primary {
@@ -62,16 +88,24 @@
     font-size: 2rem;
     margin-bottom: 12px;
   }
-  .section-subtitle {
-    font-size: 1rem;
+  .section-header h3 {
+    font-size: 1.1rem;
     margin-bottom: 32px;
   }
   .categories-section,
   .offers-section,
   .combos-section {
-    padding: 40px 20px;
-    margin-bottom: 30px;
-    border-radius: 10px;
+    background:
+      radial-gradient(circle at 15% 95%, rgba(145, 110, 14, 0.425), transparent 14%),
+      radial-gradient(circle at 85% 95%, rgba(145, 110, 14, 0.425), transparent 14%);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .section-container {
+      padding: 40px 20px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+    }
   }
   .categories-grid,
   .offers-grid,
@@ -87,25 +121,38 @@
   .categories-section,
   .offers-section,
   .combos-section {
+    background:
+      radial-gradient(circle at 5% 110%, rgba(145, 93, 14, 0.2), transparent 35%),
+      radial-gradient(circle at 95% 110%, rgba(145, 93, 14, 0.2), transparent 35%);
     width: 100%;
-    max-width: 1120px;
-    padding: 40px 32px;
+    display: flex;
+    justify-content: center;
+    padding: 60px 0px 100px;
+    .section-container {
+      width: 100%;
+      max-width: 1120px;
+      padding: 0px 32px;
+    }
+  }
+  .section-button {
+    border: 1px solid #e2bc83;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #000103 !important;
+    text-decoration: none;
+    padding: 8px 24px;
+    box-shadow:
+      0 3px 18px rgba(20, 12, 6, 0.45),
+      inset 0 -1px 6px rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(226, 188, 131, 0.5);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
-  .section-header {
-    margin-bottom: 40px;
-  }
   .section-header h2 {
     font-size: 2.25rem;
     margin-bottom: 16px;
   }
-
-  /*   .welcome-hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  } */
 
   .categories-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

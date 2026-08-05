@@ -21,7 +21,7 @@
 :root {
   --text: #1e2f4f;
   --text-h: #d6aa2a;
-  --bg: #f5f8ff;
+  --bg: #1d2225;
   --bg-section: #f0f4fb;
   --border: #d9e4f4;
   --shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
@@ -47,19 +47,19 @@ html {
 }
 
 .golden-text {
-  background: linear-gradient(to right, #9a612c 5%, #f5bc66 35% 65%, #9a612c 95%) !important;
+  background: linear-gradient(to right, #946a44, #e2bc83 55%, #946a44) !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
   -webkit-background-clip: text !important;
 }
 .golden-text-on-hover:hover {
-  background: linear-gradient(to right, #9a612c 5%, #f5bc66 35% 65%, #9a612c 95%) !important;
+  background: linear-gradient(to right, #946a44, #e2bc83 55%, #946a44) !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
   -webkit-background-clip: text !important;
 }
 .golden-background {
-  background: linear-gradient(to right, #9a612c 5%, #f5bc66 35% 65%, #9a612c 95%) !important;
+  background: linear-gradient(to right, #55402c, #e2bc83 55%, #55402c) !important;
 }
 svg {
   --start-color: #4facfe;

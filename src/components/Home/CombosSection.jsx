@@ -19,31 +19,33 @@ function CombosSection() {
 
   return (
     <section className="combos-section">
-      <div className="section-header">
-        <h2>{content.home.combos.title}</h2>
-        <p className="section-subtitle">{content.home.combos.subtitle}</p>
-      </div>
-      <div className="combos-grid">
-        {combos.slice(0, content.home.combos.maxItems).map((combo) => (
-          <ProductCard
-            key={combo.id}
-            product={combo}
-            isCombo
-            onAddToCart={addItem}
-            onIncreaseQuantity={increaseQuantity}
-            onDecreaseQuantity={decreaseQuantity}
-            getItemQuantity={getItemQuantity}
-            orderSent={orderSent}
-          />
-        ))}
-      </div>
-      <div className="section-footer">
-        <a
-          className="btn-primary golden-background rounded-lg text-primary-dark! font-bold py-1"
-          href={content.home.combos.ctaHref}
-        >
-          {content.home.combos.ctaLabel}
-        </a>
+      <div className="section-container">
+        <div className="section-header">
+          <h2>{content.home.combos.title}</h2>
+          <h3>{content.home.combos.subtitle}</h3>
+        </div>
+        <div className="combos-grid">
+          {combos.slice(0, content.home.combos.maxItems).map((combo) => (
+            <ProductCard
+              key={combo.id}
+              product={combo}
+              isCombo
+              onAddToCart={addItem}
+              onIncreaseQuantity={increaseQuantity}
+              onDecreaseQuantity={decreaseQuantity}
+              getItemQuantity={getItemQuantity}
+              orderSent={orderSent}
+            />
+          ))}
+        </div>
+        <div className="section-footer">
+          <a
+            className="section-button btn-primary golden-background hover:brightness-110  hover:shadow-amber-500/10! hover:shadow-lg!  transition-all duration-300"
+            href={content.home.combos.ctaHref}
+          >
+            {content.home.combos.ctaLabel}
+          </a>
+        </div>
       </div>
     </section>
   );
