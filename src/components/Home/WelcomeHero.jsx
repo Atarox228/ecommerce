@@ -6,7 +6,7 @@ function WelcomeHero() {
   return (
     <section className="welcome-hero">
       <div className="hero-content">
-        <p className="hero-kicker">Distribuidora oficial de bebidas</p>
+        <span className="hero-kicker">Distribuidora oficial de bebidas</span>
         <h1>
           <span className="hero-title-line">{content.home.hero.title}</span>
           <span className="hero-highlight golden-text">{content.home.hero.highlight}</span>

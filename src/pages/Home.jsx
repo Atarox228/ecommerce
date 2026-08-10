@@ -6,13 +6,11 @@ import '../styles/home-page.css';
 
 function Home() {
   return (
-    <div className="home">
-      <main className="home-content">
-        <WelcomeHero />
-        {/* <OffersSection /> */}
-        <CombosSection />
-      </main>
-    </div>
+    <article className="home-content">
+      <WelcomeHero />
+      {/* <OffersSection /> */}
+      <CombosSection />
+    </article>
   );
 }
 

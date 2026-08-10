@@ -20,11 +20,11 @@ function CombosSection() {
   return (
     <section className="combos-section">
       <div className="section-container">
-        <div className="section-header">
+        <header className="section-header">
           <h2>{content.home.combos.title}</h2>
           <h3>{content.home.combos.subtitle}</h3>
-        </div>
-        <div className="combos-grid">
+        </header>
+        <article className="combos-grid">
           {combos.slice(0, content.home.combos.maxItems).map((combo) => (
             <ProductCard
               key={combo.id}
@@ -37,15 +37,15 @@ function CombosSection() {
               orderSent={orderSent}
             />
           ))}
-        </div>
-        <div className="section-footer">
+        </article>
+        <footer className="section-footer">
           <a
             className="section-button btn-primary golden-background hover:brightness-110  hover:shadow-amber-500/10! hover:shadow-lg!  transition-all duration-300"
             href={content.home.combos.ctaHref}
           >
             {content.home.combos.ctaLabel}
           </a>
-        </div>
+        </footer>
       </div>
     </section>
   );

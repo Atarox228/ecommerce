@@ -62,8 +62,7 @@ export const content = {
       maxPrice: 'Precio máximo',
     },
     toolbar: {
-      searchLabel: 'Buscar en catálogo',
-      searchPlaceholder: 'Buscar por nombre...',
+      searchPlaceholder: 'Buscar en catálogo',
       sortLabel: 'Ordenar por',
       sortOptions: [
         { value: 'destacados', label: 'Destacados' },

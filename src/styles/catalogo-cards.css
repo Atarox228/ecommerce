@@ -1,11 +1,5 @@
 /* Tarjetas del catálogo */
 
-.catalogo-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
 .catalogo-card {
   display: flex;
   flex-direction: column;
@@ -15,7 +9,9 @@
   border: 1px solid var(--border);
   border-radius: 18px;
   box-shadow: 0 12px 28px rgba(1, 33, 58, 0.08);
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
 .catalogo-card:hover {
@@ -125,16 +121,4 @@
   text-align: center;
   color: var(--text);
   font-weight: 700;
-}
-
-@media (max-width: 1024px) {
-  .catalogo-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 720px) {
-  .catalogo-grid {
-    grid-template-columns: 1fr;
-  }
 }
