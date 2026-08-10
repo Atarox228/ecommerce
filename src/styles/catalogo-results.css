@@ -1,0 +1,89 @@
+/* Barra de herramientas del catálogo (búsqueda, ordenamiento, filtros) */
+.catalogo-results {
+  position: relative;
+  overflow: hidden;
+  padding: 0 clamp(8px, 16px, 24px) clamp(20px, 24px, 30px);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  z-index: 2;
+}
+.catalogo-results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 0.92rem;
+  & > p {
+    color: rgb(250, 239, 214);
+  }
+}
+
+.loading-state,
+.empty-state {
+  background: rgba(0, 14, 24, 0.4);
+  border: 1px solid rgba(246, 185, 20, 0.32);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(1, 33, 58, 0.06);
+  padding: 42px 20px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.catalogo-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 28px 0 0;
+}
+
+.page-button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(246, 185, 20, 0.22);
+  border-radius: 10px;
+  background: rgba(0, 14, 24, 0.5);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-button.active {
+  background: rgba(246, 185, 20, 0.22);
+  border-color: rgba(246, 185, 20, 0.32);
+  color: white;
+}
+
+.page-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.catalogo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 18px;
+  column-gap: 32px;
+  /* width: 1120px; */
+}
+@media (min-width: 720px) {
+  .catalogo-results-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .catalogo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .catalogo-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

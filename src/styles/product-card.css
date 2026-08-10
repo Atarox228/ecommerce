@@ -75,6 +75,7 @@
     border-radius: 12px;
     font-size: 1rem;
     font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 1);
   }
 }
 
@@ -112,7 +113,6 @@
   font-size: 1rem;
   font-weight: 400;
   color: #bea36d;
-  margin-bottom: 4px;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
 }
 
@@ -130,17 +130,18 @@
 }
 
 .discount-badge {
+  background: linear-gradient(45deg, #55402c, #e2bc83 55%, #55402c);
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: linear-gradient(180deg, #e0b86b 0%, #b8863d 100%);
+  top: 14px;
+  left: 14px;
   color: #08121a;
   padding: 6px 12px;
   border-radius: 14px;
-  font-size: 0.75rem;
-  font-weight: 800;
+  font-size: 0.85rem;
+  font-weight: 700;
   z-index: 12;
-  box-shadow: 0 6px 14px rgba(16, 10, 6, 0.45);
+
+  box-shadow: 0 2px 5px rgba(16, 10, 6, 0.85);
 }
 
 .combo-button {
@@ -196,6 +197,7 @@
     width: 100%;
     text-align: center;
     color: #f3e6cf;
+
     border-bottom: 1px solid;
     border-image: linear-gradient(to right, #3f331d91 0%, #e0b86b 50%, #3f331d91 100%) 1;
     padding: 4px 10px;

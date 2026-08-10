@@ -43,9 +43,11 @@ function App() {
   return (
     <CartProvider>
       <Header />
-      {pathname === content.routes.catalogo && <Catalogo />}
-      {pathname === content.routes.carrito && <Carrito />}
-      {pathname !== content.routes.catalogo && pathname !== content.routes.carrito && <Home />}
+      <main>
+        {pathname === content.routes.catalogo && <Catalogo />}
+        {pathname === content.routes.carrito && <Carrito />}
+        {pathname !== content.routes.catalogo && pathname !== content.routes.carrito && <Home />}
+      </main>
       {ageStatus !== 'adult' && (
         <AgeGateModal
           badge={content.ageGate.badge}

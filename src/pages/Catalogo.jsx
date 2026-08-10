@@ -1,14 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import CatalogoHero from '../components/Catalogo/CatalogoHero';
-import CatalogoToolbar from '../components/Catalogo/CatalogoToolbar';
 import CatalogoSidebar from '../components/Catalogo/CatalogoSidebar';
 import CatalogoResults from '../components/Catalogo/CatalogoResults';
 import { getCatalogoItems } from '../services/api';
 import { useCart } from '../context/CartContext';
+import '../styles/catalogo-page.css';
 import '../styles/shared.css';
 import '../styles/catalogo-hero.css';
-import '../styles/catalogo-toolbar.css';
-import '../styles/catalogo-sidebar.css';
 import '../styles/catalogo-cards.css';
 
 const PAGE_SIZE = 9;
@@ -25,16 +23,7 @@ function Catalogo() {
   const [priceMin, setPriceMin] = useState(0);
   const [priceMax, setPriceMax] = useState(0);
   const [page, setPage] = useState(1);
-  const {
-    cartItems,
-    totals,
-    orderSent,
-    addItem,
-    increaseQuantity,
-    decreaseQuantity,
-    clearCart,
-    getItemQuantity,
-  } = useCart();
+  const { orderSent, addItem, increaseQuantity, decreaseQuantity, getItemQuantity } = useCart();
 
   useEffect(() => {
     let isMounted = true;
@@ -151,54 +140,45 @@ function Catalogo() {
     const nextValue = Number(event.target.value);
     setPriceMax(Number.isFinite(nextValue) ? Math.max(nextValue, priceMin || nextValue) : 0);
   };
-
+  console.log(visibleItems);
   return (
-    <div className="catalogo-page">
-      <main className="catalogo-main">
-        <CatalogoHero
-          itemsCount={items.length}
-          filteredCount={filteredItems.length}
-          maxPrice={availableRange.max}
+    <article className="catalogo-main">
+      <CatalogoHero
+        query={query}
+        onQueryChange={setQuery}
+        sortBy={sortBy}
+        onSortByChange={setSortBy}
+      />
+      {/* 
+      <section className="catalogo-layout">
+         <CatalogoSidebar
+          priceMin={priceMin}
+          priceMax={priceMax}
+          onPriceMinChange={handlePriceMinChange}
+          onPriceMaxChange={handlePriceMaxChange}
           formatPrice={formatPrice}
+          cartItems={cartItems}
+          cartTotals={totals}
+          onClearCart={clearCart}
+          orderSent={orderSent}
         />
-
-        <CatalogoToolbar
-          query={query}
-          onQueryChange={setQuery}
-          sortBy={sortBy}
-          onSortByChange={setSortBy}
-        />
-
-        <section className="catalogo-layout">
-          <CatalogoSidebar
-            priceMin={priceMin}
-            priceMax={priceMax}
-            onPriceMinChange={handlePriceMinChange}
-            onPriceMaxChange={handlePriceMaxChange}
-            formatPrice={formatPrice}
-            cartItems={cartItems}
-            cartTotals={totals}
-            onClearCart={clearCart}
-            orderSent={orderSent}
-          />
-
-          <CatalogoResults
-            loading={loading}
-            filteredItems={filteredItems}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            visibleItems={visibleItems}
-            formatPrice={formatPrice}
-            onAddToCart={addItem}
-            onIncreaseQuantity={increaseQuantity}
-            onDecreaseQuantity={decreaseQuantity}
-            getItemQuantity={getItemQuantity}
-            orderSent={orderSent}
-            onPageChange={setPage}
-          />
-        </section>
-      </main>
-    </div>
+ 
+      </section> */}
+      <CatalogoResults
+        loading={loading}
+        filteredItems={filteredItems}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        visibleItems={visibleItems}
+        formatPrice={formatPrice}
+        onAddToCart={addItem}
+        onIncreaseQuantity={increaseQuantity}
+        onDecreaseQuantity={decreaseQuantity}
+        getItemQuantity={getItemQuantity}
+        orderSent={orderSent}
+        onPageChange={setPage}
+      />
+    </article>
   );
 }
 

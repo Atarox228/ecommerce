@@ -1,8 +1,7 @@
 import { content } from '../../content';
-
-function getItemTitle(item) {
-  return item.nombre || item.name;
-}
+import '../../styles/catalogo-results.css';
+import Card from '../Card';
+import Arrow from '../Icons/Arrow';
 
 function CatalogoResults({
   loading,
@@ -10,7 +9,6 @@ function CatalogoResults({
   currentPage,
   totalPages,
   visibleItems,
-  formatPrice,
   onAddToCart,
   onIncreaseQuantity,
   onDecreaseQuantity,
@@ -26,9 +24,6 @@ function CatalogoResults({
             ? content.catalogo.results.loadingSummary
             : `${filteredItems.length} ${filteredItems.length === 1 ? content.catalogo.results.resultSingular : content.catalogo.results.resultPlural}`}
         </p>
-        <p>
-          {content.catalogo.results.pagePrefix} {currentPage} {content.catalogo.results.pageSeparator} {totalPages}
-        </p>
       </div>
 
       {loading ? (
@@ -38,57 +33,18 @@ function CatalogoResults({
       ) : (
         <div className="catalogo-grid">
           {visibleItems.map((item) => {
-            const title = getItemTitle(item);
-            const image = item.imagen || item.image;
-            const displayPrice = item.price ?? item.precio ?? 0;
-            const originalPrice = item.originalPrice;
-            const quantity = getItemQuantity(item.id);
-            const isUnavailable = !item.stock || orderSent;
-
+            console.log('Rendering item:', item); // Debugging log
             return (
-              <article className="catalogo-card" key={item.id}>
-                <div className="catalogo-card-image">
-                  <img src={image} alt={title} loading="lazy" />
-                  {item.discount > 0 && <span className="catalogo-badge">-{item.discount}%</span>}
-                </div>
-
-                <div className="catalogo-card-body">
-                  <p className="catalogo-card-name">{title}</p>
-
-                  <div className="catalogo-price-row">
-                    <strong>${formatPrice(displayPrice)}</strong>
-                    {originalPrice && originalPrice !== displayPrice && (
-                      <del>${formatPrice(originalPrice)}</del>
-                    )}
-                  </div>
-
-                  <p className="catalogo-stock">
-                    {item.stock ? content.catalogo.results.available : content.catalogo.results.unavailable}
-                  </p>
-
-                  <div className="catalogo-quantity-control" aria-label={`Control de cantidad de ${title}`}>
-                    <button
-                      type="button"
-                      className="catalogo-qty-button"
-                      onClick={() => onDecreaseQuantity(item.id)}
-                      disabled={quantity === 0 || orderSent}
-                      aria-label={`Quitar una unidad de ${title}`}
-                    >
-                      -
-                    </button>
-                    <span className="catalogo-qty-value">{quantity}</span>
-                    <button
-                      type="button"
-                      className="catalogo-qty-button"
-                      onClick={() => (quantity === 0 ? onAddToCart(item) : onIncreaseQuantity(item.id))}
-                      disabled={isUnavailable}
-                      aria-label={`Agregar una unidad de ${title}`}
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              </article>
+              <Card
+                product={item}
+                isOffer={item.discount > 0}
+                onAddToCart={onAddToCart}
+                onIncreaseQuantity={onIncreaseQuantity}
+                onDecreaseQuantity={onDecreaseQuantity}
+                getItemQuantity={getItemQuantity}
+                orderSent={orderSent}
+                key={item.id}
+              />
             );
           })}
         </div>
@@ -103,7 +59,7 @@ function CatalogoResults({
             disabled={currentPage === 1}
             aria-label={content.catalogo.buttons.prevPageLabel}
           >
-            ‹
+            <Arrow className="w-4 h-4" />
           </button>
 
           {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
@@ -125,7 +81,7 @@ function CatalogoResults({
             disabled={currentPage === totalPages}
             aria-label={content.catalogo.buttons.nextPageLabel}
           >
-            ›
+            <Arrow className="w-4 h-4 rotate-180" />
           </button>
         </nav>
       )}
