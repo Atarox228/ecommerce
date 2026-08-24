@@ -1,4 +1,3 @@
-import React from 'react';
 import Bag from '../Icons/Bag';
 import '../../styles/product-card.css';
 

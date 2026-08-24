@@ -102,7 +102,7 @@ export const content = {
       subtitle: 'Revisá los productos y luego terminá tu pedido en la página del carrito.',
       emptyState: 'Todavía no agregaste productos al carrito.',
       itemLabel: 'producto',
-      itemsLabel: 'productos',
+      itemsLabel: 'productos:',
       totalLabel: 'Total',
       clearLabel: 'Vaciar carrito',
       checkoutLabel: 'Ir al carrito',

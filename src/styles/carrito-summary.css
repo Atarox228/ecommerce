@@ -1,39 +1,41 @@
 /* Resumen de precios y totales */
 
-.carrito-price-summary {
-  border: 1px solid var(--border);
+.carrito-summary {
   border-radius: 12px;
   padding: 12px;
-  background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+  border: 1px solid rgba(226, 188, 131, 0.5);
+  background: #1d2225;
+  box-shadow: inset 0 0px 16px rgba(226, 188, 131, 0.116);
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  color: rgb(214, 199, 159);
+  height: 160px;
+  width: 350px;
+}
+.price-breakdown {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
 }
-
 .price-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 4px 0;
   font-size: 0.95rem;
+  color: rgba(214, 199, 159, 0.719);
 }
-
-.price-row span:first-child {
-  color: var(--muted);
+.subtotal {
   font-weight: 500;
+  font-size: 0.85rem;
 }
-
-.price-row span:last-child {
-  color: var(--text);
-  font-weight: 600;
+.adjustment {
+  color: rgb(214, 199, 159);
 }
-
-.price-row.adjustment {
-  padding: 8px 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
 .price-row.adjustment.descuento span:last-child {
   color: #25d366;
   font-weight: 700;
@@ -44,48 +46,8 @@
   font-weight: 700;
 }
 
-.price-row.total {
-  padding-top: 8px;
+.total {
+  color: rgb(214, 199, 159);
   font-size: 1.1rem;
-}
-
-.price-row.total span:first-child {
-  color: var(--dark);
   font-weight: 700;
-}
-
-.price-row.total strong {
-  color: var(--dark);
-  font-size: 1.3rem;
-}
-
-.carrito-summary {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.carrito-summary > div:first-child {
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.carrito-summary span {
-  color: var(--muted);
-  font-size: 0.88rem;
-}
-
-.carrito-summary strong {
-  color: var(--dark);
-  font-size: 1.2rem;
-}
-
-@media (max-width: 760px) {
-  .carrito-summary {
-    grid-template-columns: 1fr;
-  }
 }

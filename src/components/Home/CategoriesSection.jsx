@@ -19,7 +19,7 @@ function CategoriesSection() {
     <section className="categories-section">
       <div className="section-header">
         <h2>{content.home.categories.title}</h2>
-        <p className="section-subtitle">{content.home.categories.subtitle}</p>
+        <h3 className="section-subtitle">{content.home.categories.subtitle}</h3>
       </div>
       <div className="categories-grid">
         {categories.map((category) => (

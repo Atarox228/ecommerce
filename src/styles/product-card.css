@@ -227,7 +227,7 @@
       position: absolute;
       height: 2px;
       width: 16px;
-      background: #8a7857;
+      background: #9e7f44;
     }
     &.product-plus-button::before {
       content: '';

@@ -11,7 +11,7 @@
 
 .section-header h3 {
   color: rgb(165, 150, 129);
-  font-size: 2rem;
+  font-size: 1rem;
   margin: 0 auto 24px;
   text-align: center;
   max-width: 720px;
@@ -95,9 +95,6 @@
   .categories-section,
   .offers-section,
   .combos-section {
-    background:
-      radial-gradient(circle at 15% 95%, rgba(145, 110, 14, 0.425), transparent 14%),
-      radial-gradient(circle at 85% 95%, rgba(145, 110, 14, 0.425), transparent 14%);
     width: 100%;
     display: flex;
     justify-content: center;
