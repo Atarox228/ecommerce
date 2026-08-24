@@ -1,13 +1,10 @@
+import '../styles/catalogo-page.css';
 import { useEffect, useMemo, useState } from 'react';
 import CatalogoHero from '../components/Catalogo/CatalogoHero';
 import CatalogoSidebar from '../components/Catalogo/CatalogoSidebar';
 import CatalogoResults from '../components/Catalogo/CatalogoResults';
 import { getCatalogoItems } from '../services/api';
 import { useCart } from '../context/CartContext';
-import '../styles/catalogo-page.css';
-import '../styles/shared.css';
-import '../styles/catalogo-hero.css';
-import '../styles/catalogo-cards.css';
 
 const PAGE_SIZE = 9;
 
@@ -58,7 +55,7 @@ function Catalogo() {
     };
   }, []);
 
-  const availableRange = useMemo(() => {
+  /* const availableRange = useMemo(() => {
     const prices = items
       .map((item) => item.price ?? item.precio)
       .filter((price) => Number.isFinite(price));
@@ -71,7 +68,7 @@ function Catalogo() {
       min: Math.min(...prices),
       max: Math.max(...prices),
     };
-  }, [items]);
+  }, [items]); */
 
   const filteredItems = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -121,16 +118,16 @@ function Catalogo() {
   const currentPage = Math.min(page, totalPages);
   const visibleItems = filteredItems.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
-  useEffect(() => {
-    if (page > totalPages) {
-      setPage(totalPages);
-    }
-  }, [page, totalPages]);
-
-  useEffect(() => {
+  const handleQueryChange = (nextQuery) => {
+    setQuery(nextQuery);
     setPage(1);
-  }, [query, sortBy, priceMin, priceMax]);
+  };
 
+  const handleSortByChange = (nextSortBy) => {
+    setSortBy(nextSortBy);
+    setPage(1);
+  };
+  /* 
   const handlePriceMinChange = (event) => {
     const nextValue = Number(event.target.value);
     setPriceMin(Number.isFinite(nextValue) ? Math.min(nextValue, priceMax || nextValue) : 0);
@@ -139,15 +136,15 @@ function Catalogo() {
   const handlePriceMaxChange = (event) => {
     const nextValue = Number(event.target.value);
     setPriceMax(Number.isFinite(nextValue) ? Math.max(nextValue, priceMin || nextValue) : 0);
-  };
-  console.log(visibleItems);
+  }; */
+
   return (
     <article className="catalogo-main">
       <CatalogoHero
         query={query}
-        onQueryChange={setQuery}
+        onQueryChange={handleQueryChange}
         sortBy={sortBy}
-        onSortByChange={setSortBy}
+        onSortByChange={handleSortByChange}
       />
       {/* 
       <section className="catalogo-layout">

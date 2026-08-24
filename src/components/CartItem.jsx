@@ -1,4 +1,5 @@
 import { content } from '../content';
+import '../styles/carrito-items.css';
 
 function CartItem({ item, onIncrease, onDecrease, onRemove, disabled = false, compact = false }) {
   const formatPrice = (value) => new Intl.NumberFormat('es-AR').format(Math.round(value || 0));
@@ -20,7 +21,9 @@ function CartItem({ item, onIncrease, onDecrease, onRemove, disabled = false, co
             >
               −
             </button>
-            <span>{content.catalogo.cart.quantityLabel}: {item.quantity}</span>
+            <span>
+              {content.catalogo.cart.quantityLabel}: {item.quantity}
+            </span>
             <button
               type="button"
               className="cart-step-button"
@@ -58,23 +61,19 @@ function CartItem({ item, onIncrease, onDecrease, onRemove, disabled = false, co
         <div className="carrito-item-controls">
           <button
             type="button"
-            className="qty-button"
+            className="golden-background minus"
             onClick={() => onDecrease(item.id)}
             disabled={disabled}
             aria-label={`Quitar una unidad de ${item.title}`}
-          >
-            -
-          </button>
-          <span className="qty-value">{item.quantity}</span>
+          ></button>
+          <span>{item.quantity}</span>
           <button
             type="button"
-            className="qty-button"
+            className="golden-background plus"
             onClick={() => onIncrease(item.id)}
             disabled={disabled}
             aria-label={`Agregar una unidad de ${item.title}`}
-          >
-            +
-          </button>
+          ></button>
         </div>
       </div>
 

@@ -2,7 +2,7 @@ import { content } from '../../content';
 import '../../styles/catalogo-results.css';
 import Card from '../Card';
 import Arrow from '../Icons/Arrow';
-
+import '../../styles/catalogo-cards.css';
 function CatalogoResults({
   loading,
   filteredItems,

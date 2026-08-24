@@ -1,21 +1,27 @@
 import { content } from '../../content';
-
+import '../../styles/carrito-summary.css';
 function PriceBreakdown({ totals }) {
   const formatPrice = (value) => new Intl.NumberFormat('es-AR').format(Math.round(value || 0));
 
   return (
     <section className="carrito-summary">
       <div>
-        <span>{content.catalogo.cart.itemsLabel}</span>
-        <strong>{totals.quantity}</strong>
+        <span className="flex gap-2">
+          {content.catalogo.cart.itemsLabel} <strong>{totals.quantity}</strong>
+        </span>
       </div>
-      <div className="carrito-price-summary">
-        <div className="price-row">
-          <span>Subtotal</span>
-          <span>${formatPrice(totals.subtotal)}</span>
+      <div className="price-breakdown">
+        <div>
+          <div className="price-row subtotal">
+            <span>Subtotal</span>
+            <span>${formatPrice(totals.subtotal)}</span>
+          </div>
+          <hr></hr>
         </div>
         {totals.adjustment !== 0 && (
-          <div className={`price-row adjustment ${totals.adjustment > 0 ? 'recargo' : 'descuento'}`}>
+          <div
+            className={`price-row adjustment ${totals.adjustment > 0 ? 'recargo' : 'descuento'}`}
+          >
             <span>
               {totals.adjustment > 0 ? 'Recargo' : 'Descuento'} ({totals.adjustmentPercentage}%)
             </span>
@@ -24,9 +30,12 @@ function PriceBreakdown({ totals }) {
             </span>
           </div>
         )}
-        <div className="price-row total">
-          <span>{content.catalogo.cart.totalLabel}</span>
-          <strong>${formatPrice(totals.total)}</strong>
+        <div>
+          <hr></hr>
+          <div className="price-row total">
+            <span>{content.catalogo.cart.totalLabel}</span>
+            <span>${formatPrice(totals.total)}</span>
+          </div>
         </div>
       </div>
     </section>

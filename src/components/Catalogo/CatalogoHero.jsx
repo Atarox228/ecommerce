@@ -1,5 +1,5 @@
 import { content } from '../../content';
-
+import '../../styles/catalogo-hero.css';
 function CatalogoHero({ query, onQueryChange, sortBy, onSortByChange }) {
   return (
     <section className="catalogo-hero">
