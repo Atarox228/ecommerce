@@ -1,17 +1,10 @@
+import '../styles/catalogo-page.css';
 import { useEffect, useMemo, useState } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import CatalogoHero from '../components/Catalogo/CatalogoHero';
-import CatalogoToolbar from '../components/Catalogo/CatalogoToolbar';
 import CatalogoSidebar from '../components/Catalogo/CatalogoSidebar';
 import CatalogoResults from '../components/Catalogo/CatalogoResults';
 import { getCatalogoItems } from '../services/api';
 import { useCart } from '../context/CartContext';
-import '../styles/shared.css';
-import '../styles/catalogo-hero.css';
-import '../styles/catalogo-toolbar.css';
-import '../styles/catalogo-sidebar.css';
-import '../styles/catalogo-cards.css';
 
 const PAGE_SIZE = 9;
 
@@ -27,16 +20,7 @@ function Catalogo() {
   const [priceMin, setPriceMin] = useState(0);
   const [priceMax, setPriceMax] = useState(0);
   const [page, setPage] = useState(1);
-  const {
-    cartItems,
-    totals,
-    orderSent,
-    addItem,
-    increaseQuantity,
-    decreaseQuantity,
-    clearCart,
-    getItemQuantity,
-  } = useCart();
+  const { orderSent, addItem, increaseQuantity, decreaseQuantity, getItemQuantity } = useCart();
 
   useEffect(() => {
     let isMounted = true;
@@ -52,7 +36,9 @@ function Catalogo() {
 
       setItems(data);
 
-      const prices = data.map((item) => item.price ?? item.precio).filter((price) => Number.isFinite(price));
+      const prices = data
+        .map((item) => item.price ?? item.precio)
+        .filter((price) => Number.isFinite(price));
       const min = prices.length > 0 ? Math.min(...prices) : 0;
       const max = prices.length > 0 ? Math.max(...prices) : 0;
 
@@ -69,8 +55,10 @@ function Catalogo() {
     };
   }, []);
 
-  const availableRange = useMemo(() => {
-    const prices = items.map((item) => item.price ?? item.precio).filter((price) => Number.isFinite(price));
+  /* const availableRange = useMemo(() => {
+    const prices = items
+      .map((item) => item.price ?? item.precio)
+      .filter((price) => Number.isFinite(price));
 
     if (prices.length === 0) {
       return { min: 0, max: 0 };
@@ -80,7 +68,7 @@ function Catalogo() {
       min: Math.min(...prices),
       max: Math.max(...prices),
     };
-  }, [items]);
+  }, [items]); */
 
   const filteredItems = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -104,7 +92,9 @@ function Catalogo() {
         sorted.sort((a, b) => (b.price ?? b.precio ?? 0) - (a.price ?? a.precio ?? 0));
         break;
       case 'nombre-asc':
-        sorted.sort((a, b) => (a.nombre || a.name || '').localeCompare(b.nombre || b.name || '', 'es'));
+        sorted.sort((a, b) =>
+          (a.nombre || a.name || '').localeCompare(b.nombre || b.name || '', 'es'),
+        );
         break;
       case 'destacados':
       default:
@@ -128,16 +118,16 @@ function Catalogo() {
   const currentPage = Math.min(page, totalPages);
   const visibleItems = filteredItems.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
-  useEffect(() => {
-    if (page > totalPages) {
-      setPage(totalPages);
-    }
-  }, [page, totalPages]);
-
-  useEffect(() => {
+  const handleQueryChange = (nextQuery) => {
+    setQuery(nextQuery);
     setPage(1);
-  }, [query, sortBy, priceMin, priceMax]);
+  };
 
+  const handleSortByChange = (nextSortBy) => {
+    setSortBy(nextSortBy);
+    setPage(1);
+  };
+  /* 
   const handlePriceMinChange = (event) => {
     const nextValue = Number(event.target.value);
     setPriceMin(Number.isFinite(nextValue) ? Math.min(nextValue, priceMax || nextValue) : 0);
@@ -146,59 +136,46 @@ function Catalogo() {
   const handlePriceMaxChange = (event) => {
     const nextValue = Number(event.target.value);
     setPriceMax(Number.isFinite(nextValue) ? Math.max(nextValue, priceMin || nextValue) : 0);
-  };
+  }; */
 
   return (
-    <div className="catalogo-page">
-      <Header />
-
-      <main className="catalogo-main">
-        <CatalogoHero
-          itemsCount={items.length}
-          filteredCount={filteredItems.length}
-          maxPrice={availableRange.max}
+    <article className="catalogo-main">
+      <CatalogoHero
+        query={query}
+        onQueryChange={handleQueryChange}
+        sortBy={sortBy}
+        onSortByChange={handleSortByChange}
+      />
+      {/* 
+      <section className="catalogo-layout">
+         <CatalogoSidebar
+          priceMin={priceMin}
+          priceMax={priceMax}
+          onPriceMinChange={handlePriceMinChange}
+          onPriceMaxChange={handlePriceMaxChange}
           formatPrice={formatPrice}
+          cartItems={cartItems}
+          cartTotals={totals}
+          onClearCart={clearCart}
+          orderSent={orderSent}
         />
-
-        <CatalogoToolbar
-          query={query}
-          onQueryChange={setQuery}
-          sortBy={sortBy}
-          onSortByChange={setSortBy}
-        />
-
-        <section className="catalogo-layout">
-          <CatalogoSidebar
-            priceMin={priceMin}
-            priceMax={priceMax}
-            onPriceMinChange={handlePriceMinChange}
-            onPriceMaxChange={handlePriceMaxChange}
-            formatPrice={formatPrice}
-            cartItems={cartItems}
-            cartTotals={totals}
-            onClearCart={clearCart}
-            orderSent={orderSent}
-          />
-
-          <CatalogoResults
-            loading={loading}
-            filteredItems={filteredItems}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            visibleItems={visibleItems}
-            formatPrice={formatPrice}
-            onAddToCart={addItem}
-            onIncreaseQuantity={increaseQuantity}
-            onDecreaseQuantity={decreaseQuantity}
-            getItemQuantity={getItemQuantity}
-            orderSent={orderSent}
-            onPageChange={setPage}
-          />
-        </section>
-      </main>
-
-      <Footer />
-    </div>
+ 
+      </section> */}
+      <CatalogoResults
+        loading={loading}
+        filteredItems={filteredItems}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        visibleItems={visibleItems}
+        formatPrice={formatPrice}
+        onAddToCart={addItem}
+        onIncreaseQuantity={increaseQuantity}
+        onDecreaseQuantity={decreaseQuantity}
+        getItemQuantity={getItemQuantity}
+        orderSent={orderSent}
+        onPageChange={setPage}
+      />
+    </article>
   );
 }
 

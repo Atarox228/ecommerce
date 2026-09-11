@@ -1,34 +1,57 @@
 import { content } from '../../content';
-
-function CatalogoHero({ itemsCount, filteredCount, maxPrice, formatPrice }) {
+import '../../styles/catalogo-hero.css';
+function CatalogoHero({ query, onQueryChange, sortBy, onSortByChange }) {
   return (
     <section className="catalogo-hero">
-      <nav className="catalogo-breadcrumb" aria-label="Breadcrumb">
-        <a href={content.routes.home}>{content.catalogo.breadcrumbHome}</a>
-        <span aria-hidden="true">›</span>
-        <span>{content.catalogo.breadcrumbCurrent}</span>
-      </nav>
+      <div>
+        <h2 className="golden-text text-3xl font-semibold">{content.catalogo.eyebrow}</h2>
+        <section className="catalogo-toolbar ">
+          <input
+            type="search"
+            name="search"
+            placeholder={content.catalogo.toolbar.searchPlaceholder}
+            value={query}
+            className="catalogo-search flex-1"
+            onChange={(event) => onQueryChange(event.target.value)}
+          />
 
-      <div className="catalogo-hero-card">
-        <div>
-          <p className="catalogo-eyebrow">{content.catalogo.eyebrow}</p>
-          <h1>{content.catalogo.title}</h1>
-        </div>
+          <label className="flex items-center gap-3 sm:w-auto catalogo-sort">
+            <span className="sr-only">{content.catalogo.toolbar.sortLabel}</span>
 
-        <div className="catalogo-stats" aria-label="Resumen del catálogo">
-          <div className="stat-card">
-            <strong>{formatPrice(itemsCount)}</strong>
-            <span>{content.catalogo.stats.products}</span>
-          </div>
-          <div className="stat-card">
-            <strong>{formatPrice(filteredCount)}</strong>
-            <span>{content.catalogo.stats.results}</span>
-          </div>
-          <div className="stat-card">
-            <strong>{formatPrice(maxPrice)}</strong>
-            <span>{content.catalogo.stats.maxPrice}</span>
-          </div>
-        </div>
+            <div className="relative p-0!">
+              <select
+                value={sortBy}
+                name="sort"
+                onChange={(event) => onSortByChange(event.target.value)}
+                className="catalogo-sort appearance-none"
+              >
+                {content.catalogo.toolbar.sortOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+
+              <svg
+                className="pointer-events-none absolute right-10 top-1/2 -translate-y-1/2 text-slate-300"
+                width="16"
+                height="16"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M6 8l4 4 4-4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          </label>
+        </section>
       </div>
     </section>
   );

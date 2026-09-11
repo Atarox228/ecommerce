@@ -6,6 +6,8 @@ import EdadRestringida from './pages/EdadRestringida';
 import AgeGateModal from './components/AgeGateModal';
 import { content } from './content';
 import { CartProvider } from './context/CartContext';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
@@ -35,22 +37,17 @@ function App() {
   const handleMinorAccess = () => {
     window.localStorage.removeItem(content.ageGate.storageKey);
     setAgeStatus('minor');
-    window.history.pushState({}, '', content.routes.edadRestringida);
+    window.location.href = content.ageGate.minorRedirect;
   };
-
-  if (ageStatus === 'minor' || isAgeRestrictionRoute) {
-    return (
-      <CartProvider>
-        <EdadRestringida />
-      </CartProvider>
-    );
-  }
 
   return (
     <CartProvider>
-      {pathname === content.routes.catalogo && <Catalogo />}
-      {pathname === content.routes.carrito && <Carrito />}
-      {pathname !== content.routes.catalogo && pathname !== content.routes.carrito && <Home />}
+      <Header />
+      <main>
+        {pathname === content.routes.catalogo && <Catalogo />}
+        {pathname === content.routes.carrito && <Carrito />}
+        {pathname !== content.routes.catalogo && pathname !== content.routes.carrito && <Home />}
+      </main>
       {ageStatus !== 'adult' && (
         <AgeGateModal
           badge={content.ageGate.badge}
@@ -64,6 +61,7 @@ function App() {
           onMinorAccess={handleMinorAccess}
         />
       )}
+      <Footer />
     </CartProvider>
   );
 }

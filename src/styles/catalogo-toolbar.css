@@ -1,15 +1,5 @@
 /* Barra de herramientas del catálogo (búsqueda, ordenamiento, filtros) */
-
-.catalogo-toolbar {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 260px;
-  gap: 16px;
-  align-items: end;
-  margin: 24px 0 18px;
-}
-
-.catalogo-search,
-.catalogo-sort,
+/* 
 .filter-card,
 .loading-state,
 .empty-state {
@@ -19,16 +9,6 @@
   box-shadow: 0 12px 30px rgba(1, 33, 58, 0.06);
 }
 
-.catalogo-search,
-.catalogo-sort {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 14px 16px;
-}
-
-.catalogo-search span,
-.catalogo-sort span,
 .filter-card h2 {
   margin: 0;
   color: var(--dark);
@@ -36,8 +16,6 @@
   font-weight: 700;
 }
 
-.catalogo-search input,
-.catalogo-sort select,
 .price-inputs input {
   width: 100%;
   border: 0;
@@ -45,10 +23,6 @@
   background: transparent;
   color: var(--text);
   font-size: 1rem;
-}
-
-.catalogo-search input::placeholder {
-  color: #8b98ad;
 }
 
 .filter-card {
@@ -153,3 +127,4 @@
     align-items: flex-start;
   }
 }
+ */

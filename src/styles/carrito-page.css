@@ -1,98 +1,135 @@
 .carrito-page {
-  min-height: 100vh;
+  min-height: 70vh;
+  width: 100%;
+  padding: 0 12px;
+  display: flex;
+  justify-content: center;
   background:
-    radial-gradient(circle at top right, rgba(246, 185, 20, 0.14), transparent 30%),
-    linear-gradient(180deg, #f7f9fd 0%, #eef3fa 100%);
+    radial-gradient(circle at 15% 95%, rgba(145, 110, 14, 0.123), transparent 14%),
+    radial-gradient(circle at 5% 55%, rgba(16, 35, 97, 0.425), transparent 34%),
+    radial-gradient(circle at 95% 25%, rgba(26, 33, 100, 0.315), transparent 34%);
+  padding-bottom: 80px;
 }
 
 .carrito-main {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 28px 16px 0;
-}
-
-.carrito-card {
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(217, 228, 244, 0.9);
-  border-radius: 24px;
+  margin-top: 140px;
+  width: 100%;
+  padding: 12px 12px;
+  background: linear-gradient(
+    135deg,
+    rgb(1, 3, 12, 0.8) 0%,
+    rgb(9, 15, 46, 0.8),
+    rgb(9, 28, 43, 0.8) 60%,
+    rgb(3, 12, 21, 0.8) 100%
+  );
+  border: 1px solid rgba(226, 188, 131, 0.5);
+  border-radius: 12px;
   box-shadow: 0 18px 40px rgba(1, 33, 58, 0.08);
-  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
-}
-
-.carrito-head {
-  display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
+  gap: 18px;
 }
 
 .carrito-eyebrow {
   margin: 0;
   display: inline-flex;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: rgba(246, 185, 20, 0.14);
-  color: var(--dark);
-  font-size: 0.82rem;
+  padding: 3px 10px;
+  border-radius: 50px;
+  background: rgba(250, 195, 44, 0.15);
+  color: rgb(214, 199, 159);
+  font-size: 0.7rem;
   font-weight: 700;
 }
-
-.carrito-head h1 {
-  margin-top: 10px;
-  color: var(--text);
-  font-size: clamp(1.7rem, 2.8vw, 2.3rem);
-  line-height: 1.2;
+.carrito-head {
+  width: 100%;
+  & div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    & a {
+      border: 1px solid #e2bc83;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #000103 !important;
+      text-decoration: none;
+      padding: 8px 8px;
+      box-shadow:
+        0 3px 18px rgba(20, 12, 6, 0.45),
+        inset 0 -1px 6px rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(226, 188, 131, 0.5);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+  }
+  & h1 {
+    margin-top: 10px;
+    color: rgb(240, 232, 209);
+    font-size: clamp(1.7rem, 2.8vw, 2.3rem);
+    line-height: 1.2;
+  }
 }
 
 .carrito-intro {
   margin-top: 8px;
-  color: var(--muted);
+  color: rgba(240, 232, 209, 0.7);
   max-width: 640px;
-}
-
-.carrito-back-link,
-.carrito-primary-link {
-  text-decoration: none;
-  color: #fff;
-  background: var(--dark);
-  border-radius: 10px;
-  font-weight: 700;
-  padding: 10px 14px;
 }
 
 .carrito-lock-banner {
   margin: 0;
-  border: 1px solid rgba(208, 139, 30, 0.35);
+  border: 1px solid rgba(226, 188, 131, 0.5);
   background: rgba(246, 185, 20, 0.14);
-  color: #7a4d04;
+  color: rgb(226, 188, 131);
   border-radius: 12px;
   padding: 10px 12px;
   font-weight: 600;
 }
 
 .carrito-empty {
-  border: 1px dashed var(--border);
+  border: 1px dashed rgba(243, 189, 109, 0.6);
+  background: rgba(156, 116, 4, 0.1);
   border-radius: 16px;
   padding: 22px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
+  width: 100%;
   gap: 12px;
+  & p {
+    color: rgba(240, 232, 209);
+  }
+}
+.carrito-primary-link {
+  border: 1px solid #e2bc83;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #000103 !important;
+  text-decoration: none;
+  padding: 8px 24px;
+  box-shadow:
+    0 3px 18px rgba(20, 12, 6, 0.45),
+    inset 0 -1px 6px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(226, 188, 131, 0.5);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .carrito-actions {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
+  width: 100%;
+  justify-content: flex-end;
+  padding-top: 18px;
 }
 
 .carrito-primary-btn,
 .carrito-secondary-btn {
   border: 0;
-  border-radius: 12px;
+  border-radius: 8px;
   min-height: 44px;
   padding: 0 16px;
   font-weight: 700;
@@ -101,12 +138,13 @@
 
 .carrito-primary-btn {
   background: linear-gradient(120deg, #ca9841, #a37037);
-  color: #fff;
+  color: black;
 }
 
 .carrito-secondary-btn {
-  background: var(--bg-section);
-  color: var(--dark);
+  background: rgba(0, 0, 0, 0.281);
+  border: 1px solid rgba(226, 188, 131, 0.5);
+  color: rgb(214, 199, 159);
 }
 
 .carrito-primary-btn:disabled,
@@ -115,9 +153,11 @@
   cursor: not-allowed;
 }
 
-@media (max-width: 760px) {
+@media (min-width: 760px) {
   .carrito-main {
-    padding-inline: 12px;
+    padding: 18px;
+    margin-inline: 0px;
+    max-width: 1120px;
   }
 
   .carrito-card {
@@ -127,9 +167,13 @@
   .carrito-head {
     flex-direction: column;
   }
-
-  .carrito-empty {
-    flex-direction: column;
-    align-items: flex-start;
+  .carrito-head {
+    & div {
+      & a {
+        font-weight: 700;
+        font-size: 1.1rem;
+        padding: 8px 24px;
+      }
+    }
   }
 }

@@ -1,5 +1,4 @@
-import ageRestrictionLogo from './assets/logoFassGrande.webp';
-import './env.d.ts'
+import './env.d.ts';
 
 export const content = {
   site: {
@@ -16,11 +15,9 @@ export const content = {
     contacto: '/#contacto',
   },
   navLinks: [
-    { label: 'Inicio', href: '/' },
     { label: 'Catálogo', href: '/catalogo' },
+    // { label: 'Promociones', href: '/promociones' },
     { label: 'Carrito', href: '/carrito' },
-    // { label: 'Promociones', href: '/#promociones' },
-    { label: 'Contacto', href: '/#contacto' },
   ],
   home: {
     hero: {
@@ -28,8 +25,8 @@ export const content = {
       highlight: 'mejor precio',
       description:
         'Distribuidor oficial de vinos, licores, cervezas y bebidas espirituosas. Envíos en el día para tus eventos.',
-      ctaLabel: 'Ver Ofertas del Mes',
-      ctaHref: '/#promociones',
+      ctaLabel: 'Ver catálogo y ofertas',
+      ctaHref: '/catalogo',
     },
     categories: {
       title: 'Nuestras Categorías',
@@ -65,8 +62,7 @@ export const content = {
       maxPrice: 'Precio máximo',
     },
     toolbar: {
-      searchLabel: 'Buscar en catálogo',
-      searchPlaceholder: 'Buscar por nombre...',
+      searchPlaceholder: 'Buscar en catálogo',
       sortLabel: 'Ordenar por',
       sortOptions: [
         { value: 'destacados', label: 'Destacados' },
@@ -81,7 +77,8 @@ export const content = {
       maxLabel: 'Máximo',
       activeRangePrefix: 'Rango activo:',
       stateTitle: 'Estado',
-      stateText: 'Se muestran solo productos activos. Las promos sin coincidencia en el mock se ignoran.',
+      stateText:
+        'Se muestran solo productos activos. Las promos sin coincidencia en el mock se ignoran.',
     },
     results: {
       loadingSummary: 'Cargando catálogo...',
@@ -105,7 +102,7 @@ export const content = {
       subtitle: 'Revisá los productos y luego terminá tu pedido en la página del carrito.',
       emptyState: 'Todavía no agregaste productos al carrito.',
       itemLabel: 'producto',
-      itemsLabel: 'productos',
+      itemsLabel: 'productos:',
       totalLabel: 'Total',
       clearLabel: 'Vaciar carrito',
       checkoutLabel: 'Ir al carrito',
@@ -142,7 +139,7 @@ export const content = {
       {
         label: '+54 9 11 3161-5976',
         href: 'tel:+549113161-5976',
-        icon: '📞',
+        type: 'phone',
       },
       // {
       //   label: 'ventas@fassbebidas.com',
@@ -152,7 +149,7 @@ export const content = {
       {
         label: '@fass.logistica',
         href: 'https://www.instagram.com/fass.logistica/',
-        icon: '📱',
+        type: 'socials',
         external: true,
       },
     ],
@@ -171,19 +168,19 @@ export const content = {
     storageKey: 'fass-age-verification',
     badge: 'Acceso restringido',
     title: 'Confirmá tu edad',
-    description: 'Este sitio web está dirigido solo a mayores de 18 años. Elegí una opción para continuar.',
+    description:
+      'Este sitio web de FASS BEBIDAS está dirigido exclusivamente a personas mayores de 18 años. Seleccioná tu edad para continuar.',
     adultPrompt: 'Soy Mayor de edad (+18)',
-    adultAction: 'Entrar',
+    adultAction: 'Entrar y ver el sitio',
     minorPrompt: 'Soy Menor de edad (-18)',
-    minorAction: 'Salir',
+    minorAction: 'No puedo ingresar',
+    minorRedirect: 'https://fada-argentina.org.ar/menores-ni-una-gota/',
   },
   ageRestriction: {
-    logoSrc: ageRestrictionLogo,
-    logoAlt: 'Logo de Fass Bebidas',
     message: 'Este sitio web esta dirigido solo a mayor de 18 años',
   },
   // Load mocks only in development to avoid bundling them in production
-  catalogoData: (await (async () => {
+  catalogoData: await (async () => {
     if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV) {
       try {
         const mod = await import('./mocks/catalogo.json');
@@ -194,7 +191,7 @@ export const content = {
     }
 
     return { packs: [], promos: [] };
-  })()),
+  })(),
 };
 
 export default content;

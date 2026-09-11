@@ -1,16 +1,12 @@
-.home {
-  background: var(--bg);
-  width: 100%;
-}
-
 .home-content {
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  align-items: center;
+  width: 100%;
 }
 
 @media (max-width: 720px) {
   .home-content {
-    gap: 56px;
+    gap: 24px;
   }
 }
